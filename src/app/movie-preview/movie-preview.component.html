@@ -1,0 +1,18 @@
+
+<div
+[class.active]="isFlipped"
+  class="flip-card"
+  (click)="onPreviewClick()"
+>
+  <div class="flip-card__front">
+    <img
+      [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
+      [alt]="movie.title"
+      [title]="movie.title"
+      class="preview-image"
+    >
+  </div>
+  <div class="flip-card__back">
+    <h4 class="flip-card__title">{{ movie.title }}</h4>
+  </div>
+</div>

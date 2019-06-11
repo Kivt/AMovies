@@ -1,0 +1,12 @@
+.app-header {
+  padding: 10px;
+  background-color: #282350;
+  box-shadow: 0 4px 12px rgba(21,18,41,.2);
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 45px;
+  z-index: 2;
+}
