@@ -25,8 +25,18 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome'],
+    browsers: ['Chrome', 'HeadlessChromium'],
     singleRun: false,
-    restartOnFileChange: true
+    restartOnFileChange: true,
+    customLaunchers: {
+      HeadlessChromium: {
+        base: 'ChromiumHeadless',
+        flags: [
+          '--no-sandbox',
+          '--proxy-bypass-list=*',
+          '--proxy-server=\'direct://\''
+       ]
+      }
+    }
   });
 };
