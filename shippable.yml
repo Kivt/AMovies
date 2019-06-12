@@ -1,0 +1,20 @@
+language: node_js
+node_js:
+  - '9'
+
+build:
+  ci:
+    - npm install
+    - npm run test-headless
+
+integrations:
+  notifications:
+    - integrationName: slack_amovies
+      type: slack
+      recipients: "amovies"
+    - integrationName: email
+      type: email
+      on_success: never
+      on_failure: never
+      on_cancel: never
+      on_pull_request: never
