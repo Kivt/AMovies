@@ -1,11 +1,15 @@
 language: node_js
 node_js:
-  - '9'
+  - 9
 
 build:
   ci:
     - npm install
     - npm run test-headless
+  on_success:
+    - echo -e '\033[0;32mSUCCESS\033[0m'
+  on_failure:
+    - echo -e '\033[0;31mFAILURE\033[0m'
 
 integrations:
   notifications:
