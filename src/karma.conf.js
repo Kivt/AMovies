@@ -29,10 +29,11 @@ module.exports = function (config) {
     singleRun: false,
     restartOnFileChange: true,
     customLaunchers: {
-      HeadlessChromium: {
-        base: 'ChromiumHeadless',
+      ChromeShippable: {
+        base: 'ChromeHeadless',
         flags: [
           '--no-sandbox',
+          '--disable-setuid-sandbox',
        ]
       }
     }
