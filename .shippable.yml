@@ -5,7 +5,8 @@ node_js:
   - '9'
 
 install:
-  - npm i -g npm
+  - npm install
 
-script:
-  - npm run test-headless
+build:
+  ci:
+    - npm run test-headless
