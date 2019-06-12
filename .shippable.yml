@@ -4,9 +4,8 @@ language: node_js
 node_js:
   - '9'
 
-install:
-  - npm install
-
 build:
   ci:
+    - npm i @angular/cli
+    - npm install
     - npm run test-headless
