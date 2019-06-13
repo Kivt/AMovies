@@ -1,2 +1,2 @@
 web: npm install
-web: ng build
+web: npm start
