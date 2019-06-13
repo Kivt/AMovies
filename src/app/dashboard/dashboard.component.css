@@ -1,7 +1,7 @@
 .popular-movies {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  grid-auto-rows: minmax(300px, 380px);
+  grid-auto-rows: calc(300px + 10vh + 30vw);
   grid-gap: 1rem;
 }
 
@@ -11,6 +11,18 @@
   border: 1px solid rgb(20, 23, 63);
   outline: none;
   color: white;
-  font-size: 120%;
+  font-size: 140%;
   cursor: pointer;
+}
+
+@media screen and (min-width: 768px) {
+  .popular-movies {
+    grid-auto-rows: 380px;
+  }
+}
+
+@media screen and (min-width: 1900px) {
+  .popular-movies {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
 }
