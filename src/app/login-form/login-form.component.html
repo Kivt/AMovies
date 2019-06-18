@@ -1,0 +1,67 @@
+<form
+  #loginForm="ngForm"
+  class="full-screen-form"
+  (submit)="onFormSubmit(loginForm)"
+>
+  <div class="box">
+    <h1 class="title has-text-centered">Sign In</h1>
+
+    <div class="field">
+      <label class="label">
+        Email
+        <div class="control">
+          <input
+            type="email"
+            name="email"
+            class="input"
+            required
+            email
+            [(ngModel)]="email"
+            [ngClass]="{ 'is-danger': emailModel.invalid && emailModel.touched }"
+            #emailModel="ngModel"
+          >
+        </div>
+      </label>
+
+      <p
+        [hidden]="emailModel.valid || emailModel.untouched"
+        class="help is-danger"
+      >
+        {{emailModel.value ? 'Must be valid email' : 'Email is required'}}
+      </p>
+    </div>
+
+    <div class="field">
+      <label class="label">
+        Password
+        <div class="control">
+          <input
+            #passModel="ngModel"
+            type="password"
+            name="password"
+            class="input"
+            minlength="6"
+            required
+            [ngClass]="{ 'is-danger': passModel.invalid && passModel.touched }"
+            [(ngModel)]="password"
+          >
+        </div>
+      </label>
+
+      <p
+        class="help is-danger"
+        [hidden]="passModel.valid || passModel.untouched"
+      >
+        Password must be minimus 6 characters
+      </p>
+    </div>
+
+    <button
+      class="button is-fullwidth"
+      type="submit"
+      [disabled]="!loginForm.valid"
+    >
+      Sign In
+    </button>
+  </div>
+</form>

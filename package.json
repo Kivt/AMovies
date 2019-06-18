@@ -10,7 +10,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "test-headless": "ng test --watch=false --no-progress --browsers=ChromeShippable",
-    "heroku-postbuild": "ng build --prod"
+    "heroku-postbuild": "ng build --prod",
+    "watch-node": "nodemon server.js"
   },
   "private": true,
   "dependencies": {
@@ -22,8 +23,11 @@
     "@angular/platform-browser": "~7.2.0",
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
+    "bulma": "^0.7.5",
     "core-js": "^2.5.4",
     "express": "^4.17.1",
+    "mongodb": "^3.2.7",
+    "nodemon": "^1.19.1",
     "path": "^0.12.7",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",

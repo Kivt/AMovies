@@ -13,14 +13,15 @@
     >
   </div>
   <div class="flip-card__back">
-    <h4 class="flip-card__title">{{ movie.title }}</h4>
-    <p>{{ movie.overview }}</p>
+    <h4 class="title is-4 has-text-centered">{{ movie.title }}</h4>
+    <p class="is-size-6">{{ movie.overview }}</p>
     <div class="flip-card__info">
       <div class="vote">
         <span>{{ movie.vote_average }}</span> / 10
       </div>
 
-      <div>Release: {{ movie.release_date }}</div>
+      <!-- <div>Release: {{ movie.release_date }}</div> -->
+      <a class="flip-card__details" [routerLink]="'/movie'">Details</a>
     </div>
   </div>
 </div>

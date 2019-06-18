@@ -1,0 +1,14 @@
+.box {
+  width: 100%;
+  max-width: 375px;
+}
+
+@media (min-width: 768px) {
+  .box {
+    margin-top: 10vh;
+  }
+}
+
+.button {
+  margin-top: 20px;
+}

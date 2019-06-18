@@ -4,4 +4,34 @@ body {
   margin: 0;
   background-color: #1d193f;
   color: white;
+  position: relative;
+  min-height: 100vh;
+}
+
+.full-screen-form {
+  height: calc(100vh - 75px);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.button {
+  background-color: #571f98;
+  border-color: #282350;
+  color: white;
+  transition: background-color .3s ease;
+}
+
+.button:hover, .button:focus, .button:disabled {
+  background-color: #66369d;
+  border-color: #282350;
+  color: white;
+}
+
+[hidden] {
+  display: none;
+}
+
+.title {
+  color: inherit;
 }
