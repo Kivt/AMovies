@@ -1,0 +1,24 @@
+.top-content {
+  display: flex;
+}
+
+.top-info {
+  margin-left: 2rem;
+  flex: auto;
+}
+
+.is-divider {
+  background-color: rgba(255, 255, 255, .6);
+  border: none;
+  display: flex;
+  height: 1px;
+  margin: 1rem 0;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+}
+
+.is-divider .text {
+  background-color: #1d193f;
+  padding: 0 1rem;
+}

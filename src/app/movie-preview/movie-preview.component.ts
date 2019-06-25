@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Movie } from '../classes/movie';
+import { MoviePreview } from '../classes/movie-preview';
 
 @Component({
   selector: 'app-movie-preview',
@@ -7,11 +7,15 @@ import { Movie } from '../classes/movie';
   styleUrls: ['./movie-preview.component.css']
 })
 export class MoviePreviewComponent {
-  @Input() movie: Movie;
+  @Input() movie: MoviePreview;
   @Input() isFlipped: boolean;
-  @Output() previewClick: EventEmitter<Movie> = new EventEmitter();
+  @Output() previewClick: EventEmitter<MoviePreview> = new EventEmitter();
 
   onPreviewClick() {
     this.previewClick.emit(this.movie);
+  }
+
+  onDetailsClick(event: Event) {
+    event.stopPropagation();
   }
 }

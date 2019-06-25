@@ -1,0 +1,31 @@
+<div
+  *ngIf="details"
+  class="top-content"
+>
+  <img
+    [src]="'https://image.tmdb.org/t/p/w500/' + details.poster_path"
+    alt="image"
+  >
+
+  <div class="top-info">
+    <h2 class="title is-2 has-text-centered">{{ details.title }}</h2>
+
+    <div class="is-divider">
+      <div class="text">Genres</div>
+    </div>
+
+    <p>{{ genres }}</p>
+
+    <div class="is-divider">
+        <div class="text">Cast</div>
+      </div>
+
+    <p>{{ cast }}</p>
+
+    <div class="is-divider">
+        <div class="text">Overview</div>
+      </div>
+
+    <p>{{ details.overview }}</p>
+  </div>
+</div>

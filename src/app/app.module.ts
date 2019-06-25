@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { MoviePreviewComponent } from './movie-preview/movie-preview.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
+import { MovieDetailsComponent } from './movie-details/movie-details.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { RegistrationFormComponent } from './registration-form/registration-form
     MoviePreviewComponent,
     LoginFormComponent,
     RegistrationFormComponent,
+    MovieDetailsComponent,
   ],
   imports: [
     BrowserModule,

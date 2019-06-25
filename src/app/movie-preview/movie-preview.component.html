@@ -21,7 +21,13 @@
       </div>
 
       <!-- <div>Release: {{ movie.release_date }}</div> -->
-      <a class="flip-card__details" [routerLink]="'/movie'">Details</a>
+      <a
+        class="flip-card__details"
+        [routerLink]="'/movie/' + movie.id"
+        (click)="onDetailsClick($event)"
+      >
+        Details
+      </a>
     </div>
   </div>
 </div>

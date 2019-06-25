@@ -1,4 +1,6 @@
-export class Movie {
+/* tslint:disable */
+
+export class MoviePreview {
   id: number;
   title: string;
   original_title: string;

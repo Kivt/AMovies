@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { DashboardService } from './dashboard.service';
 
-import { Movie } from '../classes/movie';
+import { MoviePreview } from '../classes/movie-preview';
 
 
 @Component({
@@ -12,7 +12,7 @@ import { Movie } from '../classes/movie';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   popularMoviesObservable$: any;
-  popularMovies: Movie[] = [];
+  popularMovies: MoviePreview[] = [];
   flippedPreviews = {};
 
   constructor(private dashboardService: DashboardService) { }
@@ -31,10 +31,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   onMoreClick() {
-    this.dashboardService.requestPopularMovies();
+    this.dashboardService.getPopularMovies();
   }
 
-  onPreviewClick(movie: Movie) {
+  onPreviewClick(movie: MoviePreview) {
     if (this.flippedPreviews[movie.id]) {
       delete this.flippedPreviews[movie.id];
     } else {
