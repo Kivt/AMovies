@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import { MovieDetails } from '../classes/movie-details';
-import { MovieCastMember } from '../classes/movie-cast-member';
 import { ApiService } from '../api.service';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-movie-details',
@@ -14,14 +14,18 @@ export class MovieDetailsComponent implements OnInit {
   genres: string;
   cast: string;
 
+  isToken = false;
+
   constructor(
     private apiServie: ApiService,
+    private authService: AuthService,
     private route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
     this.getDetails();
     this.getMovieCast();
+    this.isToken = this.authService.isAuth();
   }
 
   getDetails() {

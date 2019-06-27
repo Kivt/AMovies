@@ -6,9 +6,22 @@ import { LoginFormComponent } from './login-form/login-form.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginFormComponent },
-  { path: 'movie/:id', component: MovieDetailsComponent },
-  { path: '', component: DashboardComponent },
+  {
+    path: 'login',
+    component: LoginFormComponent,
+  },
+  {
+    path: 'movie/:id',
+    component: MovieDetailsComponent,
+  },
+  {
+    path: '',
+    component: DashboardComponent,
+  },
+  {
+    path: '**',
+    redirectTo: '',
+  }
 ];
 
 @NgModule({
