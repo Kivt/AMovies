@@ -7,7 +7,7 @@ import { tap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class ApiService {
+export class ApiMoviesService {
   private baseUrl = 'http://localhost:8080/';
   popularPage = 1;
 

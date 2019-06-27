@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MoviePreview } from '../classes/movie-preview';
-import { ApiService } from '../api.service';
+import { ApiMoviesService } from '../api-movies.service';
 import { ReplaySubject } from 'rxjs';
 
 @Injectable({
@@ -11,7 +11,7 @@ export class DashboardService {
   popularMoviesUpdated$ = new ReplaySubject<MoviePreview[]>();
   flippedPreviews = {};
 
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiMoviesService) { }
 
   getPopularMovies() {
     this.apiService.getPopular().subscribe((data) => {

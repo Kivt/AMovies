@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import { MovieDetails } from '../classes/movie-details';
-import { ApiService } from '../api.service';
+import { ApiMoviesService } from '../api-movies.service';
 import { AuthService } from '../auth/auth.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class MovieDetailsComponent implements OnInit {
   isToken = false;
 
   constructor(
-    private apiServie: ApiService,
+    private apiService: ApiMoviesService,
     private authService: AuthService,
     private route: ActivatedRoute,
   ) { }
@@ -29,7 +29,7 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   getDetails() {
-    this.apiServie.getMovieDetails(this.route.snapshot.params.id)
+    this.apiService.getMovieDetails(this.route.snapshot.params.id)
       .subscribe(data => {
         this.details = data.data;
         this.getGenresList();
@@ -41,7 +41,7 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   getMovieCast() {
-    this.apiServie.getMovieCast(this.route.snapshot.params.id)
+    this.apiService.getMovieCast(this.route.snapshot.params.id)
       .subscribe(data => {
         this.cast = this.arrayToStringList(data.data.cast, 'name');
       });

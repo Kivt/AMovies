@@ -1,4 +1,10 @@
 <header class="app-header">
     <a [routerLink]="'/'">AMovies</a>
-  <a class="button" [routerLink]="linkHref">{{ linkTitle }}</a>
+  <a
+    *ngIf="!isAuth"
+    class="button"
+    [routerLink]="linkHref"
+  >
+    {{ linkTitle }}
+  </a>
 </header>
