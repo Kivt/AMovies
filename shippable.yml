@@ -10,7 +10,7 @@ integrations:
 
 build:
   ci:
-    - npm install
-    - npm run test-headless
+    # - npm install
+    # - npm run test-headless
   on_success:
     - git push -f git@heroku.com:amovies-3321.git master
