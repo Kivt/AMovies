@@ -1,33 +1,34 @@
-<div
-  *ngIf="details"
-  class="top-content"
->
-  <div class="poster">
-    <img
-      [src]="'https://image.tmdb.org/t/p/w500/' + details.poster_path"
-      alt="image"
-    >
-  </div>
+<ng-container *ngIf="details">
+  <h2 class="title main-title is-2 has-text-centered">{{ details.title }}</h2>
 
-  <div class="top-info">
-    <h2 class="title is-2 has-text-centered">{{ details.title }}</h2>
-
-    <div class="is-divider">
-      <div class="text">Genres</div>
+  <div class="top-content">
+    <div class="poster">
+      <img
+        [src]="'https://image.tmdb.org/t/p/w500/' + details.poster_path"
+        alt="image"
+      >
     </div>
 
-    <p>{{ genres }}</p>
+    <div class="top-info">
+      <p>{{ details.overview }}</p>
 
-    <div class="is-divider">
-        <div class="text">Cast</div>
+      <div class="is-divider">
+        <div class="text">Details</div>
       </div>
 
-    <p>{{ cast }}</p>
+      <p><span>Genres:</span> {{ details.genres }}</p>
 
-    <div class="is-divider">
-        <div class="text">Overview</div>
-      </div>
+      <p><span>Cast:</span> {{ cast }}</p>
 
-    <p>{{ details.overview }}</p>
+      <p><span>Rating:</span> {{ details.vote_average }} by {{ details.vote_count }} people</p>
+
+      <p><span>Budget:</span> {{ details.budget }}$</p>
+
+      <p><span>Duration:</span> {{ details.runtime }}</p>
+
+      <p><span>Produced by:</span> {{ details.production_companies }}</p>
+
+      <p><span>Produced in:</span> {{ details.production_countries }}</p>
+    </div>
   </div>
-</div>
+</ng-container>

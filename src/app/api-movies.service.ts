@@ -27,4 +27,8 @@ export class ApiMoviesService {
   getMovieCast(id: number | string): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}movies/${id}/credits`);
   }
+
+  getMovieSimilar(id: number | string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}movies/${id}/similar`);
+  }
 }

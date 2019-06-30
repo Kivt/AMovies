@@ -1,11 +1,15 @@
 /* tslint:disable */
-import { MovieGenre } from './movie-genre';
+
+interface BaseArray {
+  id: number;
+  name: string;
+};
 
 export class MovieDetails {
   id: number;
   adult: boolean;
   budget: number;
-  genres: MovieGenre[];
+  genres: BaseArray[];
   original_title: string;
   overview: string;
   poster_path: string;
@@ -15,4 +19,6 @@ export class MovieDetails {
   title: string;
   vote_count: number;
   vote_average: number;
+  production_companies: BaseArray[];
+  production_countries: BaseArray[];
 }

@@ -16,8 +16,8 @@
   flex: auto;
 }
 
-.top-info .title {
-  margin-bottom: 3rem;
+.main-title {
+  margin: 2.5rem 0 3rem;
 }
 
 .is-divider {
@@ -34,6 +34,14 @@
 .is-divider .text {
   background-color: #1d193f;
   padding: 0 1rem;
+}
+
+p {
+  margin-bottom: .5rem;
+}
+
+p > span {
+  font-weight: bold;
 }
 
 @media (min-width: 1200px) {

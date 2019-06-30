@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import { MovieDetails } from '../classes/movie-details';
 import { ApiMoviesService } from '../api-movies.service';
 import { AuthService } from '../auth/auth.service';
+import { MoviePreview } from '../classes/movie-preview';
 
 @Component({
   selector: 'app-movie-details',
@@ -11,10 +12,11 @@ import { AuthService } from '../auth/auth.service';
 })
 export class MovieDetailsComponent implements OnInit {
   details: MovieDetails;
-  genres: string;
   cast: string;
+  movieId = this.route.snapshot.params.id;
+  similarMovies: MoviePreview[];
 
-  isToken = false;
+  isAuth = false;
 
   constructor(
     private apiService: ApiMoviesService,
@@ -23,25 +25,32 @@ export class MovieDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.isAuth = this.authService.isAuth();
     this.getDetails();
     this.getMovieCast();
-    this.isToken = this.authService.isAuth();
+    this.getSimilarMovies();
   }
 
   getDetails() {
-    this.apiService.getMovieDetails(this.route.snapshot.params.id)
+    this.apiService.getMovieDetails(this.movieId)
       .subscribe(data => {
+        const arraysToChange = ['production_companies', 'production_countries', 'genres'];
         this.details = data.data;
-        this.getGenresList();
+        this.arraysToString(arraysToChange);
       });
   }
 
-  getGenresList() {
-    this.genres = this.arrayToStringList(this.details.genres, 'name');
+  arraysToString(arrays: string[]) {
+    arrays.forEach(item => {
+      this.details[item] = this.arrayToStringList(
+        this.details[item],
+        'name'
+      );
+    });
   }
 
   getMovieCast() {
-    this.apiService.getMovieCast(this.route.snapshot.params.id)
+    this.apiService.getMovieCast(this.movieId)
       .subscribe(data => {
         this.cast = this.arrayToStringList(data.data.cast, 'name');
       });
@@ -53,5 +62,12 @@ export class MovieDetailsComponent implements OnInit {
         return acc + val[key] + ', ';
       }, '')
       .slice(0, -2);
+  }
+
+  getSimilarMovies() {
+    this.apiService.getMovieSimilar(this.movieId)
+      .subscribe(data => {
+        this.similarMovies = data.data.results;
+      });
   }
 }

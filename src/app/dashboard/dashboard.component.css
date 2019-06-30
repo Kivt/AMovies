@@ -15,6 +15,10 @@
   cursor: pointer;
 }
 
+.title {
+  margin: 2.5rem 0 3rem;
+}
+
 @media screen and (min-width: 768px) {
   .popular-movies {
     grid-auto-rows: 380px;
