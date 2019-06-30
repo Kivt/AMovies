@@ -10,8 +10,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "test-headless": "ng test --watch=false --no-progress --browsers=ChromeShippable",
-    "heroku-postbuild": "ng build --prod",
-    "watch-node": "nodemon server.js"
+    "heroku-postbuild": "ng build --prod"
   },
   "private": true,
   "dependencies": {

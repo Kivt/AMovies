@@ -39,6 +39,7 @@ p {
   text-overflow: ellipsis;
   margin-bottom: 0;
   line-height: 1.1;
+  height: 100%;
 }
 
 .flip-card__details {

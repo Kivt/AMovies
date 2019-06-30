@@ -2,10 +2,12 @@
   *ngIf="details"
   class="top-content"
 >
-  <img
-    [src]="'https://image.tmdb.org/t/p/w500/' + details.poster_path"
-    alt="image"
-  >
+  <div class="poster">
+    <img
+      [src]="'https://image.tmdb.org/t/p/w500/' + details.poster_path"
+      alt="image"
+    >
+  </div>
 
   <div class="top-info">
     <h2 class="title is-2 has-text-centered">{{ details.title }}</h2>
