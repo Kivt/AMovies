@@ -29,6 +29,8 @@
       <p><span>Produced by:</span> {{ details.production_companies }}</p>
 
       <p><span>Produced in:</span> {{ details.production_countries }}</p>
+
+      <p><span>Release date:</span> {{ details.release_date | date:"MMMM dd, yyyy" }}</p>
     </div>
   </div>
 </ng-container>
