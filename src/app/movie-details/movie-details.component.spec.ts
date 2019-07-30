@@ -1,7 +1,15 @@
+import { Component, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterModule } from '@angular/router';
 import { MovieDetailsComponent } from './movie-details.component';
+import { MoviePreview } from '../classes/movie-preview';
+
+@Component({ selector: 'app-movie-preview', template: '' })
+class MoviePreviewComponent {
+  @Input() movie: MoviePreview;
+  @Input() isFlipped: boolean;
+}
 
 describe('MovieDetailsComponent', () => {
   let component: MovieDetailsComponent;
@@ -13,7 +21,10 @@ describe('MovieDetailsComponent', () => {
         HttpClientTestingModule,
         RouterModule.forRoot([]),
       ],
-      declarations: [ MovieDetailsComponent ]
+      declarations: [
+        MovieDetailsComponent,
+        MoviePreviewComponent
+      ]
     })
     .compileComponents();
   }));
