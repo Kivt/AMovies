@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -28,6 +29,7 @@ import { MovieDetailsComponent } from './movie-details/movie-details.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    NgxUiLoaderModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

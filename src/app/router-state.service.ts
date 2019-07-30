@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, Scroll } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
 @Injectable({

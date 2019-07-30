@@ -10,6 +10,7 @@ export class MoviePreviewComponent {
   @Input() movie: MoviePreview;
   @Input() isFlipped: boolean;
   @Output() previewClick: EventEmitter<MoviePreview> = new EventEmitter();
+  @Output() detailsClick: EventEmitter<MoviePreview> = new EventEmitter();
 
   onPreviewClick() {
     this.previewClick.emit(this.movie);
@@ -17,5 +18,6 @@ export class MoviePreviewComponent {
 
   onDetailsClick(event: Event) {
     event.stopPropagation();
+    this.detailsClick.emit(this.movie);
   }
 }

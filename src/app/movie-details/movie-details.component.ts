@@ -4,6 +4,7 @@ import { MovieDetails } from '../classes/movie-details';
 import { ApiMoviesService } from '../api-movies.service';
 import { AuthService } from '../auth/auth.service';
 import { MoviePreview } from '../classes/movie-preview';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-movie-details',
@@ -13,8 +14,9 @@ import { MoviePreview } from '../classes/movie-preview';
 export class MovieDetailsComponent implements OnInit {
   details: MovieDetails;
   cast: string;
-  movieId = this.route.snapshot.params.id;
+  movieId: string;
   similarMovies: MoviePreview[];
+  flippedPreviews = {};
 
   isAuth = false;
 
@@ -22,21 +24,39 @@ export class MovieDetailsComponent implements OnInit {
     private apiService: ApiMoviesService,
     private authService: AuthService,
     private route: ActivatedRoute,
+    private ngxService: NgxUiLoaderService,
   ) { }
 
   ngOnInit() {
+    this.onPageLoad(this.route.snapshot.params.id);
+  }
+
+  onPageLoad(movieId) {
+    this.movieId = movieId;
+    this.details = null;
     this.isAuth = this.authService.isAuth();
     this.getDetails();
     this.getMovieCast();
     this.getSimilarMovies();
+    this.flippedPreviews = {};
+  }
+
+  onPreviewClick(movie: MoviePreview) {
+    if (this.flippedPreviews[movie.id]) {
+      delete this.flippedPreviews[movie.id];
+    } else {
+      this.flippedPreviews[movie.id] = true;
+    }
   }
 
   getDetails() {
+    this.ngxService.start();
     this.apiService.getMovieDetails(this.movieId)
       .subscribe(data => {
         const arraysToChange = ['production_companies', 'production_countries', 'genres'];
         this.details = data.data;
         this.arraysToString(arraysToChange);
+        this.ngxService.stop();
       });
   }
 

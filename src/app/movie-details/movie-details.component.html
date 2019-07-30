@@ -24,7 +24,7 @@
 
       <p><span>Budget:</span> {{ details.budget }}$</p>
 
-      <p><span>Duration:</span> {{ details.runtime }}</p>
+      <p><span>Duration:</span> {{ details.runtime }} minutes</p>
 
       <p><span>Produced by:</span> {{ details.production_companies }}</p>
 
@@ -32,5 +32,17 @@
 
       <p><span>Release date:</span> {{ details.release_date | date:"MMMM dd, yyyy" }}</p>
     </div>
+  </div>
+
+  <h2 class="title is-3">Similar movies</h2>
+
+  <div class="similar-movies">
+    <app-movie-preview
+      *ngFor="let movie of similarMovies"
+      [movie]="movie"
+      [isFlipped]="!!flippedPreviews[movie.id]"
+      (previewClick)="onPreviewClick($event)"
+      (detailsClick)="onPageLoad($event.id)"
+    ></app-movie-preview>
   </div>
 </ng-container>
