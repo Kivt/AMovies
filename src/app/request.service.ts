@@ -14,10 +14,15 @@ export class RequestService {
 
   generateHeaders() {
     const token = this.authService.getToken();
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json; charset=utf-8',
-      Authorization: `Bearer ${token}`
-    });
+    const baseHeaders: any = {
+      'Content-Type': 'application/json;charset=utf-8',
+    };
+
+    if (token) {
+      baseHeaders.Authorization =  `Bearer ${token}`;
+    }
+
+    const headers = new HttpHeaders(baseHeaders);
     return headers;
   }
 

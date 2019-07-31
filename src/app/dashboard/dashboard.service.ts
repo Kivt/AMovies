@@ -15,7 +15,7 @@ export class DashboardService {
 
   getPopularMovies() {
     this.apiService.getPopular().subscribe((data) => {
-      this.popularMovies.push(...data.data);
+      this.popularMovies.push(...data.results);
       this.popularMoviesUpdated$.next([...this.popularMovies]);
     });
   }

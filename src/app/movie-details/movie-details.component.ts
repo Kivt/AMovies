@@ -54,7 +54,7 @@ export class MovieDetailsComponent implements OnInit {
     this.apiService.getMovieDetails(this.movieId)
       .subscribe(data => {
         const arraysToChange = ['production_companies', 'production_countries', 'genres'];
-        this.details = data.data;
+        this.details = data;
         this.arraysToString(arraysToChange);
         this.ngxService.stop();
       });
@@ -72,7 +72,8 @@ export class MovieDetailsComponent implements OnInit {
   getMovieCast() {
     this.apiService.getMovieCast(this.movieId)
       .subscribe(data => {
-        this.cast = this.arrayToStringList(data.data.cast, 'name');
+        // TODO: Create page for full crew
+        this.cast = this.arrayToStringList(data.cast.slice(0, 5), 'name');
       });
   }
 
@@ -87,7 +88,7 @@ export class MovieDetailsComponent implements OnInit {
   getSimilarMovies() {
     this.apiService.getMovieSimilar(this.movieId)
       .subscribe(data => {
-        this.similarMovies = data.data.results;
+        this.similarMovies = data.results;
       });
   }
 }
