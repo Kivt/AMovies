@@ -1,22 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import {ActivatedRoute, Router, NavigationEnd} from '@angular/router';
 import { MovieDetails } from '../classes/movie-details';
 import { ApiMoviesService } from '../api-movies.service';
 import { AuthService } from '../auth/auth.service';
 import { MoviePreview } from '../classes/movie-preview';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-movie-details',
   templateUrl: './movie-details.component.html',
   styleUrls: ['./movie-details.component.css']
 })
-export class MovieDetailsComponent implements OnInit {
+export class MovieDetailsComponent implements OnInit, OnDestroy {
   details: MovieDetails;
   cast: string;
   movieId: string;
   similarMovies: MoviePreview[];
   flippedPreviews = {};
+  routeSubscribtion$: Subscription;
 
   isAuth = false;
 
@@ -25,10 +27,24 @@ export class MovieDetailsComponent implements OnInit {
     private authService: AuthService,
     private route: ActivatedRoute,
     private ngxService: NgxUiLoaderService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
     this.onPageLoad(this.route.snapshot.params.id);
+    this.watchRouteChange();
+  }
+
+  ngOnDestroy() {
+    this.routeSubscribtion$.unsubscribe();
+  }
+
+  watchRouteChange() {
+    this.routeSubscribtion$ = this.router.events.subscribe(e => {
+      if (e instanceof NavigationEnd) {
+        this.onPageLoad(this.route.snapshot.params.id);
+      }
+    });
   }
 
   onPageLoad(movieId) {

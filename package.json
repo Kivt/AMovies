@@ -1,6 +1,7 @@
 {
   "name": "movies",
-  "version": "0.0.0",
+  "author": "Vitaliy Baychura",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
