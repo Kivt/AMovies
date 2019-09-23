@@ -10,10 +10,26 @@
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
 }
 
 .top-info {
   flex: auto;
+}
+
+.top-info > p:first-child {
+  margin-bottom: 2rem;
+}
+
+.top-info__details {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.top-info__details p {
+  width: 50%;
 }
 
 .main-title {
@@ -40,8 +56,8 @@ p {
   margin-bottom: .5rem;
 }
 
-p > span {
-  font-weight: bold;
+p > b {
+  padding-left: 0.5rem;
 }
 
 .similar-movies {

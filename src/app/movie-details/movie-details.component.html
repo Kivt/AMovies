@@ -1,5 +1,5 @@
 <ng-container *ngIf="details">
-  <h2 class="title main-title is-2 has-text-centered">{{ details.title }}</h2>
+  <h2 class="title main-title is-2 has-text-centered">{{ details.title }} ({{ details.release_date | date:"yyyy" }})</h2>
 
   <div class="top-content">
     <div class="poster">
@@ -12,25 +12,25 @@
     <div class="top-info">
       <p>{{ details.overview }}</p>
 
-      <div class="is-divider">
-        <div class="text">Details</div>
+      <p>Cast: <b>{{ cast }}</b></p>
+
+      <div class="top-info__details">
+        <p>Genres: <b>{{ details.genres }}</b></p>
+
+        <p>Rating: <b>{{ details.vote_average }} by {{ details.vote_count }} people</b></p>
+
+        <p *ngIf="details.budget">
+          Budget: <b>{{ details.budget }}$</b>
+        </p>
+
+        <p>Duration: <b>{{ details.runtime }} minutes</b></p>
+
+        <p>Produced by: <b>{{ details.production_companies }}</b></p>
+
+        <p>Produced in: <b>{{ details.production_countries }}</b></p>
+
+        <p>Release: <b>{{ details.release_date | date:"MMMM dd, yyyy" }}</b></p>
       </div>
-
-      <p><span>Genres:</span> {{ details.genres }}</p>
-
-      <p><span>Cast:</span> {{ cast }}</p>
-
-      <p><span>Rating:</span> {{ details.vote_average }} by {{ details.vote_count }} people</p>
-
-      <p><span>Budget:</span> {{ details.budget }}$</p>
-
-      <p><span>Duration:</span> {{ details.runtime }} minutes</p>
-
-      <p><span>Produced by:</span> {{ details.production_companies }}</p>
-
-      <p><span>Produced in:</span> {{ details.production_countries }}</p>
-
-      <p><span>Release date:</span> {{ details.release_date | date:"MMMM dd, yyyy" }}</p>
     </div>
   </div>
 
