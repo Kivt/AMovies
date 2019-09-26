@@ -1,0 +1,19 @@
+<div
+  *ngIf="isOpen"
+  class="video-modal"
+  (click)="close()"
+>
+  <button
+    class="video-modal__close"
+    (click)="close()"
+  >
+    <i class="far fa-times-circle"></i>
+  </button>
+
+  <div class="video-modal__conent">
+    <youtube-player
+      class="youtube-player"
+      [videoId]="videoId"
+    ></youtube-player>
+  </div>
+</div>

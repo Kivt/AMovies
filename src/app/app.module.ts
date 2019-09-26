@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
+import { NgxYoutubePlayerModule } from 'ngx-youtube-player';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -13,6 +14,8 @@ import { MoviePreviewComponent } from './movie-preview/movie-preview.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
+import { MovieVideosComponent } from './movie-videos/movie-videos.component';
+import { ModalVideoComponent } from './modal-video/modal-video.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +26,8 @@ import { MovieDetailsComponent } from './movie-details/movie-details.component';
     LoginFormComponent,
     RegistrationFormComponent,
     MovieDetailsComponent,
+    MovieVideosComponent,
+    ModalVideoComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,6 +35,7 @@ import { MovieDetailsComponent } from './movie-details/movie-details.component';
     HttpClientModule,
     FormsModule,
     NgxUiLoaderModule,
+    NgxYoutubePlayerModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

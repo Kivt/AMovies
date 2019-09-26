@@ -31,4 +31,8 @@ export class ApiMoviesService {
   getMovieSimilar(id: number | string): Observable<any> {
     return this.request.get(`${this.baseUrl}movie/${id}/similar?${this.API_KEY}`);
   }
+
+  getMovieVideos(id: number | string): Observable<any> {
+    return this.request.get(`${this.baseUrl}movie/${id}/videos?${this.API_KEY}`);
+  }
 }

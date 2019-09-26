@@ -14,35 +14,35 @@
 
       <p>Cast: <b>{{ cast }}</b></p>
 
-      <div class="top-info__details">
+      <section class="top-info__details">
         <p>Genres: <b>{{ details.genres }}</b></p>
-
         <p>Rating: <b>{{ details.vote_average }} by {{ details.vote_count }} people</b></p>
-
-        <p *ngIf="details.budget">
-          Budget: <b>{{ details.budget }}$</b>
-        </p>
-
+        <p *ngIf="details.budget">Budget: <b>{{ details.budget }}$</b></p>
         <p>Duration: <b>{{ details.runtime }} minutes</b></p>
-
         <p>Produced by: <b>{{ details.production_companies }}</b></p>
-
         <p>Produced in: <b>{{ details.production_countries }}</b></p>
-
         <p>Release: <b>{{ details.release_date | date:"MMMM dd, yyyy" }}</b></p>
-      </div>
+      </section>
+
+      <section class="top-info__videos">
+        <app-movie-videos
+          [videos]="videos"
+        ></app-movie-videos>
+      </section>
     </div>
   </div>
 
-  <h2 class="title is-3">Similar movies</h2>
-
   <div class="similar-movies">
-    <app-movie-preview
-      *ngFor="let movie of similarMovies"
-      [movie]="movie"
-      [isFlipped]="!!flippedPreviews[movie.id]"
-      (previewClick)="onPreviewClick($event)"
-      (detailsClick)="onPageLoad($event.id)"
-    ></app-movie-preview>
+    <h2 class="title is-3">Similar movies</h2>
+
+    <div class="similar-movies__content">
+      <app-movie-preview
+        *ngFor="let movie of similarMovies"
+        [movie]="movie"
+        [isFlipped]="!!flippedPreviews[movie.id]"
+        (previewClick)="onPreviewClick($event)"
+        (detailsClick)="onPageLoad($event.id)"
+      ></app-movie-preview>
+    </div>
   </div>
 </ng-container>

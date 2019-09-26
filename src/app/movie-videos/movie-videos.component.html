@@ -1,0 +1,12 @@
+<div class="movie-videos">
+  <button
+    *ngFor="let video of videos"
+    [title]="video.name"
+    class="button is-info"
+    (click)="openVideo(video.key)"
+  >
+    <div class="movie-button__text">{{ video.name }}</div>
+  </button>
+
+  <app-modal-video #modalVideo></app-modal-video>
+</div>
