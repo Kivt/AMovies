@@ -13,8 +13,6 @@ export class ApiMoviesService {
   region = '';
   popularPage = 1;
   topRatedPAge = 1;
-  nowPlayingPage = 1;
-  upcomingPage = 1;
 
   constructor(private request: RequestService) {
     this.getRegion();
@@ -35,17 +33,11 @@ export class ApiMoviesService {
   }
 
   getNowPlaying(): Observable<any> {
-    return this.request.get(`${this.baseUrl}movie/now_playing?${this.API_KEY}&page=${this.topRatedPAge}&region=${this.region}`)
-      .pipe(
-        tap(() => this.nowPlayingPage++),
-      );
+    return this.request.get(`${this.baseUrl}movie/now_playing?${this.API_KEY}&region=${this.region}`);
   }
 
   getUpcoming(): Observable<any> {
-    return this.request.get(`${this.baseUrl}movie/upcoming?${this.API_KEY}&page=${this.upcomingPage}&region=${this.region}`)
-      .pipe(
-        tap(() => this.upcomingPage++),
-      );
+    return this.request.get(`${this.baseUrl}movie/upcoming?${this.API_KEY}&region=${this.region}`);
   }
 
   getMovieDetails(id: number | string): Observable<any> {
