@@ -5,16 +5,30 @@
     <li class="nav-item">
       <a
         class="nav-link" [routerLink]="['/popular']"
-        [class.active]="activeRoute === 'popular'"
+        [class.active]="activeRoute === '/popular'"
       >Popular</a>
     </li>
 
     <li class="nav-item">
-        <a
-          class="nav-link" [routerLink]="['/top-rated']"
-          [class.active]="activeRoute === 'top-rated'"
-        >Top-rated</a>
-      </li>
+      <a
+        class="nav-link" [routerLink]="['/top-rated']"
+        [class.active]="activeRoute === '/top-rated'"
+      >Top rated</a>
+    </li>
+
+    <li class="nav-item">
+      <a
+        class="nav-link" [routerLink]="['/now-playing']"
+        [class.active]="activeRoute === '/now-playing'"
+      >Now Playing</a>
+    </li>
+
+    <li class="nav-item">
+      <a
+        class="nav-link" [routerLink]="['/upcoming']"
+        [class.active]="activeRoute === '/upcoming'"
+      >Upcoming</a>
+    </li>
   </ul>
 
   <!-- <a

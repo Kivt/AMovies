@@ -26,9 +26,9 @@ export class RequestService {
     return headers;
   }
 
-  get(url: string) {
+  get(url: string, headers = true) {
     return this.http.get<any>(url, {
-      headers: this.generateHeaders()
+      headers: headers ? this.generateHeaders() : null
     });
   }
 

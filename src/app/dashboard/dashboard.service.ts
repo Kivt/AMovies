@@ -9,8 +9,12 @@ import { ReplaySubject } from 'rxjs';
 export class DashboardService {
   popularMovies: MoviePreview[] = [];
   topRatedMovies: MoviePreview[] = [];
+  nowPlayingMovies: MoviePreview[] = [];
+  upcomingMovies: MoviePreview[] = [];
   popularMoviesUpdated$ = new ReplaySubject<MoviePreview[]>();
   topRatedMoviesUpdated$ = new ReplaySubject<MoviePreview[]>();
+  nowPlayingMoviesUpdated$ = new ReplaySubject<MoviePreview[]>();
+  upcomingMoviesUpdated$ = new ReplaySubject<MoviePreview[]>();
   flippedPreviews = {};
 
   constructor(private apiService: ApiMoviesService) { }
@@ -26,6 +30,20 @@ export class DashboardService {
     this.apiService.getTopRated().subscribe((data) => {
       this.topRatedMovies.push(...data.results);
       this.topRatedMoviesUpdated$.next(this.topRatedMovies);
+    });
+  }
+
+  getNowPlayingMovies() {
+    this.apiService.getNowPlaying().subscribe((data) => {
+      this.nowPlayingMovies.push(...data.results);
+      this.nowPlayingMoviesUpdated$.next(this.nowPlayingMovies);
+    });
+  }
+
+  getUpcomingMovies() {
+    this.apiService.getUpcoming().subscribe((data) => {
+      this.upcomingMovies.push(...data.results);
+      this.upcomingMoviesUpdated$.next(this.upcomingMovies);
     });
   }
 

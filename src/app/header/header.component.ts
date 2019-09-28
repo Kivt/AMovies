@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         // const isLogin = event.url === '/login';
         // this.linkTitle = isLogin ? 'Sign Up' : 'Sign In';
         // this.linkHref = isLogin ? '/register' : '/login';
-        this.activeRoute = event.url.slice(1);
+        this.activeRoute = event.urlAfterRedirects;
       }
     });
   }

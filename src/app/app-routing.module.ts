@@ -36,8 +36,23 @@ const routes: Routes = [
     }
   },
   {
+    path: 'now-playing',
+    component: DashboardComponent,
+    data: {
+      type: 'nowPlaying',
+    }
+  },
+  {
+    path: 'upcoming',
+    component: DashboardComponent,
+    data: {
+      type: 'upcoming',
+    }
+  },
+  {
     path: '**',
     redirectTo: '',
+    pathMatch: 'full',
   }
 ];
 
