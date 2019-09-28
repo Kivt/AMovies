@@ -11,6 +11,11 @@ class MoviePreviewComponent {
   @Input() isFlipped: boolean;
 }
 
+@Component({ selector: 'app-movie-videos', template: '' })
+class MovieVideosComponent {
+  @Input() videos: MoviePreview[];
+}
+
 describe('MovieDetailsComponent', () => {
   let component: MovieDetailsComponent;
   let fixture: ComponentFixture<MovieDetailsComponent>;
@@ -23,7 +28,8 @@ describe('MovieDetailsComponent', () => {
       ],
       declarations: [
         MovieDetailsComponent,
-        MoviePreviewComponent
+        MoviePreviewComponent,
+        MovieVideosComponent
       ]
     })
     .compileComponents();
