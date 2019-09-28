@@ -1,6 +1,22 @@
 <header class="app-header">
   <a [routerLink]="'/'">AMovies</a>
 
+  <ul class="nav-list">
+    <li class="nav-item">
+      <a
+        class="nav-link" [routerLink]="['/popular']"
+        [class.active]="activeRoute === 'popular'"
+      >Popular</a>
+    </li>
+
+    <li class="nav-item">
+        <a
+          class="nav-link" [routerLink]="['/top-rated']"
+          [class.active]="activeRoute === 'top-rated'"
+        >Top-rated</a>
+      </li>
+  </ul>
+
   <!-- <a
     *ngIf="!isAuth"
     class="button"

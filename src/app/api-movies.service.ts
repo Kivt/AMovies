@@ -10,6 +10,7 @@ export class ApiMoviesService {
   private API_KEY = 'api_key=f50853c92ba860fc68991df84a4c209b';
   private baseUrl = 'https://api.themoviedb.org/3/';
   popularPage = 1;
+  topRatedPAge = 1;
 
   constructor(private request: RequestService) { }
 
@@ -17,6 +18,13 @@ export class ApiMoviesService {
     return this.request.get(`${this.baseUrl}movie/popular?${this.API_KEY}&page=${this.popularPage}`)
       .pipe(
         tap(() => this.popularPage++),
+      );
+  }
+
+  getTopRated(): Observable<any> {
+    return this.request.get(`${this.baseUrl}movie/top_rated?${this.API_KEY}&page=${this.topRatedPAge}`)
+      .pipe(
+        tap(() => this.topRatedPAge++),
       );
   }
 

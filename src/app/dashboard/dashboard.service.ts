@@ -8,7 +8,9 @@ import { ReplaySubject } from 'rxjs';
 })
 export class DashboardService {
   popularMovies: MoviePreview[] = [];
+  topRatedMovies: MoviePreview[] = [];
   popularMoviesUpdated$ = new ReplaySubject<MoviePreview[]>();
+  topRatedMoviesUpdated$ = new ReplaySubject<MoviePreview[]>();
   flippedPreviews = {};
 
   constructor(private apiService: ApiMoviesService) { }
@@ -16,7 +18,14 @@ export class DashboardService {
   getPopularMovies() {
     this.apiService.getPopular().subscribe((data) => {
       this.popularMovies.push(...data.results);
-      this.popularMoviesUpdated$.next([...this.popularMovies]);
+      this.popularMoviesUpdated$.next(this.popularMovies);
+    });
+  }
+
+  getTopRatedMovies() {
+    this.apiService.getTopRated().subscribe((data) => {
+      this.topRatedMovies.push(...data.results);
+      this.topRatedMoviesUpdated$.next(this.topRatedMovies);
     });
   }
 

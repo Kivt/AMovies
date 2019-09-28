@@ -18,7 +18,22 @@ const routes: Routes = [
   },
   {
     path: '',
+    redirectTo: '/popular',
+    pathMatch: 'full',
+  },
+  {
+    path: 'popular',
     component: DashboardComponent,
+    data: {
+      type: 'popular',
+    }
+  },
+  {
+    path: 'top-rated',
+    component: DashboardComponent,
+    data: {
+      type: 'topRated',
+    }
   },
   {
     path: '**',

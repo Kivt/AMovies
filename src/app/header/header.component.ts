@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 
@@ -14,17 +14,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   linkTitle = '';
   linkHref = '';
+  activeRoute = '';
   isAuth = false;
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private authService: AuthService,
   ) {
     this.routeChange$ = this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        const isLogin = event.url === '/login';
-        this.linkTitle = isLogin ? 'Sign Up' : 'Sign In';
-        this.linkHref = isLogin ? '/register' : '/login';
+        // const isLogin = event.url === '/login';
+        // this.linkTitle = isLogin ? 'Sign Up' : 'Sign In';
+        // this.linkHref = isLogin ? '/register' : '/login';
+        this.activeRoute = event.url.slice(1);
       }
     });
   }

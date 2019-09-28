@@ -10,6 +10,49 @@
   height: 60px;
   z-index: 2;
   display: flex;
-  justify-content: space-between;
   align-items: center;
 }
+
+.nav-list {
+  display: flex;
+  align-items: center;
+  margin-left: 3rem;
+}
+
+.nav-list > .nav-item {
+  margin-left: 1rem;
+  position: relative;
+  padding: 5px 0;
+}
+
+.nav-link {
+  color: inherit;
+}
+
+.nav-link:hover {
+  opacity: .6;
+}
+
+.nav-link::after, .nav-link::before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  background-color: red;
+  transition: width .5s ease;
+}
+
+.nav-link::before {
+  left: 0;
+}
+
+.nav-link::after {
+  right: 0;
+}
+
+.nav-link.active::after, .nav-link.active::before {
+  width: 50%;
+}
+
+

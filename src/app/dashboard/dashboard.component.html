@@ -1,8 +1,8 @@
-<h2 class="title is-2">Popular Movies</h2>
+<h2 class="title is-2">{{title | titlecase }} Movies</h2>
 
 <div class="popular-movies">
   <app-movie-preview
-    *ngFor="let movie of popularMovies"
+    *ngFor="let movie of movies"
     [movie]="movie"
     [isFlipped]="!!flippedPreviews[movie.id]"
     (previewClick)="onPreviewClick($event)"
