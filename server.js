@@ -1,8 +1,11 @@
-//Install express server
+const compression = require('compression');
 const express = require('express');
 const path = require('path');
 
 const app = express();
+
+// Gzip
+app.use(compression());
 
 // Serve only the static files form the dist directory
 app.use(express.static(__dirname + '/dist/movies'));

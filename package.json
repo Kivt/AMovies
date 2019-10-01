@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
     "bulma": "^0.7.5",
+    "compression": "^1.7.4",
     "core-js": "^2.5.4",
     "express": "^4.17.1",
     "mongodb": "^3.3.2",
