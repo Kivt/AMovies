@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   linkHref = '';
   activeRoute = '';
   isAuth = false;
+  isMenuOpened = false;
 
   constructor(
     private router: Router,
@@ -36,6 +37,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.checkAuth();
     this.loginSubscribtion$ = this.authService.loggedIn$
       .subscribe(() => this.checkAuth());
+  }
+
+  toggleMenu(isOpen: boolean) {
+    this.isMenuOpened = isOpen;
   }
 
   checkAuth() {

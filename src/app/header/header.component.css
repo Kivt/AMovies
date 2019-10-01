@@ -55,4 +55,42 @@
   width: 50%;
 }
 
+.burger-menu__button {
+  display: none;
+}
 
+@media (max-width: 768px) {
+  .burger-menu__button {
+    display: block;
+    margin-left: auto;
+    background-color: transparent;
+    border-radius: 50%;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    position: relative;
+    z-index: 50;
+  }
+
+  .nav-list {
+    width: 100vw;;
+    position: fixed;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    transform: translateX(-100%);
+    transition: transform .25s ease;
+    background-color: #1d193f;
+  }
+
+  .nav-list--opened {
+    transform: translateX(0);
+  }
+
+  .nav-list > .nav-item {
+    margin: 1rem 0;
+  }
+}

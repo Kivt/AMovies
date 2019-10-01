@@ -1,11 +1,15 @@
 <header class="app-header">
   <a [routerLink]="'/'">AMovies</a>
 
-  <ul class="nav-list">
+  <ul
+    class="nav-list"
+    [class.nav-list--opened]="isMenuOpened"
+  >
     <li class="nav-item">
       <a
         class="nav-link" [routerLink]="['/popular']"
         [class.active]="activeRoute === '/popular'"
+        (click)="toggleMenu(false)"
       >Popular</a>
     </li>
 
@@ -13,6 +17,7 @@
       <a
         class="nav-link" [routerLink]="['/top-rated']"
         [class.active]="activeRoute === '/top-rated'"
+        (click)="toggleMenu(false)"
       >Top rated</a>
     </li>
 
@@ -20,6 +25,7 @@
       <a
         class="nav-link" [routerLink]="['/now-playing']"
         [class.active]="activeRoute === '/now-playing'"
+        (click)="toggleMenu(false)"
       >Now Playing</a>
     </li>
 
@@ -27,9 +33,17 @@
       <a
         class="nav-link" [routerLink]="['/upcoming']"
         [class.active]="activeRoute === '/upcoming'"
+        (click)="toggleMenu(false)"
       >Upcoming</a>
     </li>
   </ul>
+
+  <button
+    class="burger-menu__button"
+    (click)="toggleMenu(!isMenuOpened)"
+  >
+    <i [class]="isMenuOpened ? 'fas fa-times' : 'fas fa-bars'"></i>
+  </button>
 
   <!-- <a
     *ngIf="!isAuth"
