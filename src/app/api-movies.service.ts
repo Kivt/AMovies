@@ -45,10 +45,17 @@ export class ApiMoviesService {
   }
 
   getRegion() {
-    this.request.get('http://ip-api.com/json', false).subscribe((data) => {
-      this.region = data.countryCode;
-      this.regionUpdated$.next(data.countryCode);
-    });
+    this.request.get('https://get.geojs.io/v1/ip/country.json', false).subscribe(
+      (data) => {
+        this.region = data.country;
+        this.regionUpdated$.next(data.country);
+      },
+      (err) => {
+        console.log(err);
+        this.region = 'US';
+        this.regionUpdated$.next('US');
+      }
+    );
   }
 
   getMovieCast(id: number | string): Observable<any> {
