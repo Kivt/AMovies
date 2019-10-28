@@ -16,6 +16,7 @@ import { RegistrationFormComponent } from './registration-form/registration-form
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { MovieVideosComponent } from './movie-videos/movie-videos.component';
 import { ModalVideoComponent } from './modal-video/modal-video.component';
+import { HeaderSearchComponent } from './header-search/header-search.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ModalVideoComponent } from './modal-video/modal-video.component';
     MovieDetailsComponent,
     MovieVideosComponent,
     ModalVideoComponent,
+    HeaderSearchComponent,
   ],
   imports: [
     BrowserModule,

@@ -11,7 +11,8 @@
   <button
     (click)="onMoreClick()"
     class="load-more-button"
+    *ngIf="movies.length && type !== 'upcoming'"
   >
-    Load more popular movies
+    Load more movies
   </button>
 </div>

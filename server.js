@@ -15,7 +15,7 @@ app.get('/*', function(req,res) {
 res.sendFile(path.join(__dirname+'/dist/movies/index.html'));
 });
 
-// Start the app by listening on the default Heroku port
+// Start the app by listening on the default port
 const listener = app.listen(process.env.PORT || 8080, () => {
   console.log('Listening on port ' + listener.address().port);
 });

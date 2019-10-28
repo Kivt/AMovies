@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   movies: MoviePreview[] = [];
   flippedPreviews = {};
   title = '';
+  type = '';
   userCountryCode: string = null;
 
   constructor(
@@ -26,6 +27,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.type = this.route.snapshot.data.type;
     this.title = this.route.snapshot.routeConfig.path.replace('-', ' ');
     if (!this.userCountryCode) {
       this.subscribeToRegionUpdate();
@@ -48,7 +50,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   init() {
-    this.subscibeForMoviesUpdate(this.route.snapshot.data.type);
+    this.subscibeForMoviesUpdate(this.type);
     this.flippedPreviews = this.dashboardService.getFlippedPreviews();
     if (!this.movies.length) {
       this.onMoreClick();
@@ -56,8 +58,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   onMoreClick() {
-    const type = Helpers.capitalize(this.route.snapshot.data.type);
-    this.dashboardService[`get${type}Movies`]();
+    this.dashboardService.getMovies(this.type);
   }
 
   onPreviewClick(movie: MoviePreview) {

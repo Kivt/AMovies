@@ -1,0 +1,31 @@
+<div
+  [class.is-loading]="isLoading"
+  class="header-search is-hidden-touch control"
+>
+  <input
+    [(ngModel)]="inputValue"
+    type="text"
+    placeholder="Search"
+    class="header-search__input input"
+    (input)="onSearchInput($event)"
+  >
+
+  <div
+    [hidden]="!isVisible"
+    class="search-results box"
+  >
+    <ul>
+      <li
+        *ngFor="let item of movies"
+        class="search-results__item"
+      >
+        <h6>{{ item.title }}</h6>
+        <p class="search-results__description">{{ item.overview.substring(0, 100) + ' ...' }}</p>
+      </li>
+
+      <li class="search-results__item">
+        <a>All Results</a>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -16,35 +16,20 @@ export class DashboardService {
   nowPlayingMoviesUpdated$ = new ReplaySubject<MoviePreview[]>();
   upcomingMoviesUpdated$ = new ReplaySubject<MoviePreview[]>();
   flippedPreviews = {};
+  isLoading = false;
 
   constructor(private apiService: ApiMoviesService) { }
 
-  getPopularMovies() {
-    this.apiService.getPopular().subscribe((data) => {
-      this.popularMovies.push(...data.results);
-      this.popularMoviesUpdated$.next(this.popularMovies);
-    });
-  }
-
-  getTopRatedMovies() {
-    this.apiService.getTopRated().subscribe((data) => {
-      this.topRatedMovies.push(...data.results);
-      this.topRatedMoviesUpdated$.next(this.topRatedMovies);
-    });
-  }
-
-  getNowPlayingMovies() {
-    this.apiService.getNowPlaying().subscribe((data) => {
-      this.nowPlayingMovies.push(...data.results);
-      this.nowPlayingMoviesUpdated$.next(this.nowPlayingMovies);
-    });
-  }
-
-  getUpcomingMovies() {
-    this.apiService.getUpcoming().subscribe((data) => {
-      this.upcomingMovies.push(...data.results);
-      this.upcomingMoviesUpdated$.next(this.upcomingMovies);
-    });
+  getMovies(type: string) {
+    if (!this.isLoading) {
+      const cap = type.charAt(0).toUpperCase() + type.substring(1);
+      this.isLoading = true;
+      this.apiService[`get${cap}`]().subscribe((data) => {
+        this[`${type}Movies`].push(...data.results);
+        this[`${type}MoviesUpdated$`].next(this[`${type}Movies`]);
+        this.isLoading = false;
+      });
+    }
   }
 
   getFlippedPreviews() {

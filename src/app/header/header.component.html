@@ -1,5 +1,5 @@
 <header class="app-header">
-  <a [routerLink]="'/'">AMovies</a>
+  <a [routerLink]="'/'">A-Movies</a>
 
   <ul
     class="nav-list"
@@ -38,8 +38,12 @@
     </li>
   </ul>
 
+  <app-header-search
+    class="header-search"
+  ></app-header-search>
+
   <button
-    class="burger-menu__button"
+    class="burger-menu__button is-hidden-desktop"
     (click)="toggleMenu(!isMenuOpened)"
   >
     <i [class]="isMenuOpened ? 'fas fa-times' : 'fas fa-bars'"></i>

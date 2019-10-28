@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
+import { ApiMoviesService } from '../api-movies.service';
 
 @Component({
   selector: 'app-header',
@@ -15,13 +16,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
   linkTitle = '';
   linkHref = '';
   activeRoute = '';
+  search = '';
   isAuth = false;
   isMenuOpened = false;
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
-    private authService: AuthService,
+    private authService: AuthService
   ) {
     this.routeChange$ = this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {

@@ -12,10 +12,14 @@ export class ApiMoviesService {
   regionUpdated$ = new ReplaySubject<any>();
   region = '';
   popularPage = 1;
-  topRatedPAge = 1;
+  topRatedPage = 1;
 
   constructor(private request: RequestService) {
     this.getRegion();
+  }
+
+  search(query: string): Observable<any> {
+    return this.request.get(`${this.baseUrl}search/movie?${this.API_KEY}&page=1&query=${query}`);
   }
 
   getPopular(): Observable<any> {
@@ -26,9 +30,9 @@ export class ApiMoviesService {
   }
 
   getTopRated(): Observable<any> {
-    return this.request.get(`${this.baseUrl}movie/top_rated?${this.API_KEY}&page=${this.topRatedPAge}&region=${this.region}`)
+    return this.request.get(`${this.baseUrl}movie/top_rated?${this.API_KEY}&page=${this.topRatedPage}&region=${this.region}`)
       .pipe(
-        tap(() => this.topRatedPAge++),
+        tap(() => this.topRatedPage++),
       );
   }
 
