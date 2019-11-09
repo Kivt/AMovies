@@ -8,14 +8,34 @@
 
 .search-results {
   position: absolute;
+  padding: 0;
   bottom: -10px;
   right: 0;
   width: 100%;
   transform: translateY(100%);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .search-results__item {
+  display: block;
   font-size: 14px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  color: inherit;
+}
+
+.search-results__item:first-child {
+  border-top-right-radius: 6px;
+  border-top-left-radius: 6px;
+}
+
+.search-results__item:last-child {
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+.search-results__item:hover {
+  background-color: #BEE3F8;
 }
 
 .search-results__description {

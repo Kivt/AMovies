@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ApiMoviesService } from '../api-movies.service';
 import { MoviePreview } from '../classes/movie-preview';
 
@@ -7,7 +7,7 @@ import { MoviePreview } from '../classes/movie-preview';
   templateUrl: './header-search.component.html',
   styleUrls: ['./header-search.component.css']
 })
-export class HeaderSearchComponent implements OnInit {
+export class HeaderSearchComponent implements OnInit, OnDestroy {
   timeout = null;
   doneTypingInterval = 350;
   movies: MoviePreview[] = [];
@@ -15,11 +15,17 @@ export class HeaderSearchComponent implements OnInit {
   isLoading = false;
   inputValue = '';
 
+  @ViewChild('searchInput') searchInputRef;
+
   constructor(
     private apiService: ApiMoviesService,
   ) { }
 
   ngOnInit() {
+  }
+
+  ngOnDestroy() {
+    document.removeEventListener('click', this.handleGlobalClick);
   }
 
   onSearchInput(e) {
@@ -33,6 +39,13 @@ export class HeaderSearchComponent implements OnInit {
     }
   }
 
+  onSearchForcus() {
+    if (!this.isVisible && this.movies.length) {
+      this.isVisible = true;
+      document.addEventListener('click', this.handleGlobalClick);
+    }
+  }
+
   searchRequest(query: string) {
     this.isLoading = true;
     this.apiService.search(query)
@@ -40,6 +53,15 @@ export class HeaderSearchComponent implements OnInit {
         this.movies = data.results.slice(0, 5);
         this.isVisible = true;
         this.isLoading = false;
+        document.addEventListener('click', this.handleGlobalClick);
       });
+  }
+
+  handleGlobalClick = (e) => {
+    const el = e.target.closest('input') || e.target;
+    if (!el.isEqualNode(this.searchInputRef.nativeElement)) {
+      this.isVisible = false;
+      document.removeEventListener('click', this.handleGlobalClick);
+    }
   }
 }
