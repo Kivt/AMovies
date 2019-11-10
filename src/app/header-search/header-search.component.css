@@ -16,16 +16,17 @@
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
-.search-results__item {
+.search-results__empty,
+.search-results__link,
+.search-results__all-link {
   font-size: 14px;
   padding: 0.5rem 1rem;
-  cursor: pointer;
-
+  width: 100%;
+  display: block;
 }
 
 .search-results__link {
   color: inherit;
-  display: block;
 }
 
 .search-results__item:first-child {

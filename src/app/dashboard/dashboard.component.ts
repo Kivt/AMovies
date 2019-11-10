@@ -44,8 +44,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
   subscribeToRegionUpdate() {
     this.regionObservable$ = this.apiService.regionUpdated$
       .subscribe(code => {
-        this.userCountryCode = code;
-        this.init();
+        if (code) {
+          this.userCountryCode = code;
+          this.init();
+        }
       });
   }
 

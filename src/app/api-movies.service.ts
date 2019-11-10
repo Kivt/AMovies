@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable, ReplaySubject } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { RequestService } from './request.service';
+import { MoviePreview } from './classes/movie-preview';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,9 @@ import { RequestService } from './request.service';
 export class ApiMoviesService {
   private API_KEY = 'api_key=f50853c92ba860fc68991df84a4c209b';
   private baseUrl = 'https://api.themoviedb.org/3/';
-  regionUpdated$ = new ReplaySubject<any>();
+  regionUpdated$ = new BehaviorSubject<string>(null);
+  lastSearchQuery = '';
+  lastSearchResult: MoviePreview[] = [];
   region = '';
   popularPage = 1;
   topRatedPage = 1;
@@ -18,8 +21,12 @@ export class ApiMoviesService {
     this.getRegion();
   }
 
-  search(query: string): Observable<any> {
-    return this.request.get(`${this.baseUrl}search/movie?${this.API_KEY}&page=1&query=${query}`);
+  search(query: string, page: number = 1): Observable<any> {
+    this.lastSearchQuery = query;
+    return this.request.get(`${this.baseUrl}search/movie?${this.API_KEY}&page=${page}&query=${query}`)
+      .pipe(
+        tap((data) => { this.lastSearchResult = data.results; }),
+      );
   }
 
   getPopular(): Observable<any> {

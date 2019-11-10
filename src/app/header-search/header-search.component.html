@@ -30,8 +30,24 @@
         </a>
       </li>
 
-      <li class="search-results__item">
-        <a>All Results</a>
+      <li
+        [hidden]="!movies.length"
+        class="search-results__item"
+      >
+        <a
+          [routerLink]="['/search']"
+          [queryParams]="{q: inputValue}"
+          class="search-results__all-link has-text-centered"
+        >
+          All Results
+        </a>
+      </li>
+
+      <li
+        *ngIf="isVisible && !movies.length"
+        class="search-results__empty"
+      >
+        No result found
       </li>
     </ul>
   </div>

@@ -1,23 +1,42 @@
 <div class="search-form">
   <input
+    [(ngModel)]="query"
     type="text"
     class="input"
-    placeholder="Type in movie name"
+    placeholder="Movie name goes here"
   >
 
-  <button class="button is-white">
+  <button
+    class="button is-white"
+    [class.is-loading]="isLoading"
+    (click)="searchRequest(query)"
+  >
     Search
   </button>
 </div>
 
 <div class="results">
-  <div class="empty-placeholder">
+  <div
+    [hidden]="!isInitial"
+    class="empty-placeholder"
+  >
     <img
       src="assets/img/up-arrow.svg"
       class="up-arrow"
       alt="arrow"
     >
 
-    <h4 class="is-size-4 has-text-centered">Type in movie name</h4>
+    <h4  class="is-size-4 has-text-centered">
+      Type in movie name
+    </h4>
+  </div>
+
+  <div class="movies-preview__wrapper">
+    <app-movie-preview
+      *ngFor="let movie of movies"
+      [movie]="movie"
+      [isFlipped]="!!flippedPreviews[movie.id]"
+      (previewClick)="onPreviewClick($event)"
+    ></app-movie-preview>
   </div>
 </div>
