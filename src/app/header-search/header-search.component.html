@@ -17,10 +17,13 @@
     class="search-results box"
   >
     <ul>
-      <li *ngFor="let item of movies">
+      <li
+        *ngFor="let item of movies"
+        class="search-results__item"
+      >
         <a
           [routerLink]="['/movie', item.id]"
-          class="search-results__item"
+          class="search-results__link"
         >
           <h6>{{ item.title }}</h6>
           <p class="search-results__description">{{ item.overview.substring(0, 100) + ' ...' }}</p>

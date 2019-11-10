@@ -40,7 +40,7 @@
   height: 2px;
   bottom: 0;
   background-color: red;
-  transition: width .5s ease;
+  transition: width .5s linear;
 }
 
 .nav-link::before {

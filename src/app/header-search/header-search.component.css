@@ -17,11 +17,15 @@
 }
 
 .search-results__item {
-  display: block;
   font-size: 14px;
   padding: 0.5rem 1rem;
   cursor: pointer;
+
+}
+
+.search-results__link {
   color: inherit;
+  display: block;
 }
 
 .search-results__item:first-child {
@@ -35,7 +39,7 @@
 }
 
 .search-results__item:hover {
-  background-color: #BEE3F8;
+  background-color: #EBF4FF;
 }
 
 .search-results__description {

@@ -36,6 +36,7 @@ export class HeaderSearchComponent implements OnInit, OnDestroy {
       }, this.doneTypingInterval);
     } else {
       this.isVisible = false;
+      this.movies = [];
     }
   }
 

@@ -3,6 +3,9 @@
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
+    "paths": {
+      "@src/*": ["src/*"]
+    },
     "sourceMap": true,
     "declaration": false,
     "module": "es2015",

@@ -40,19 +40,6 @@ p {
   overflow: hidden;
 }
 
-.button {
-  background-color: #571f98;
-  border-color: #282350;
-  color: white;
-  transition: background-color .3s ease;
-}
-
-.button:hover, .button:focus, .button:disabled {
-  background-color: #66369d;
-  border-color: #282350;
-  color: white;
-}
-
 [hidden] {
   display: none;
 }

@@ -17,6 +17,7 @@ import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { MovieVideosComponent } from './movie-videos/movie-videos.component';
 import { ModalVideoComponent } from './modal-video/modal-video.component';
 import { HeaderSearchComponent } from './header-search/header-search.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { HeaderSearchComponent } from './header-search/header-search.component';
     MovieVideosComponent,
     ModalVideoComponent,
     HeaderSearchComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,

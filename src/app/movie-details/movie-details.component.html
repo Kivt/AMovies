@@ -1,6 +1,4 @@
 <ng-container *ngIf="details">
-  <h2 class="title main-title is-2 has-text-centered">{{ details.title }} ({{ details.release_date | date:"yyyy" }})</h2>
-
   <div class="top-content">
     <div class="poster">
       <img
@@ -10,6 +8,8 @@
     </div>
 
     <div class="top-info">
+      <h2 class="title main-title is-2 has-text-centered">{{ details.title }} ({{ details.release_date | date:"yyyy" }})</h2>
+
       <p>{{ details.overview }}</p>
 
       <p>Cast: <b>{{ cast }}</b></p>

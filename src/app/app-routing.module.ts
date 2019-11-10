@@ -4,6 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
+import { SearchComponent } from './search/search.component';
+
 import { AuthOnlyPublicGuard } from './auth/auth-only-public.guard';
 
 const routes: Routes = [
@@ -48,6 +50,10 @@ const routes: Routes = [
     data: {
       type: 'upcoming',
     }
+  },
+  {
+    path: 'search',
+    component: SearchComponent,
   },
   {
     path: '**',
