@@ -1,32 +1,34 @@
 
-<div
-[class.active]="isFlipped"
-  class="flip-card"
-  (click)="onPreviewClick()"
->
-  <div class="flip-card__front">
-    <img
-      [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
-      [alt]="movie.title"
-      [title]="movie.title"
-      class="preview-image"
-    >
-  </div>
-  <div class="flip-card__back">
-    <h4 class="title is-size-4 is-size-3-mobile has-text-centered">{{ movie.title }}</h4>
-    <p>{{ movie.overview }}</p>
-    <div class="flip-card__info">
-      <div class="vote">
-        <span>{{ movie.vote_average }}</span> / 10
-      </div>
-
-      <a
-        class="flip-card__details"
-        [routerLink]="'/movie/' + movie.id"
-        (click)="onDetailsClick($event)"
+<div class="card-wrapper">
+  <div
+    class="flip-card"
+    [class.active]="isFlipped"
+    (click)="onPreviewClick()"
+  >
+    <div class="flip-card__front">
+      <img
+        [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
+        [alt]="movie.title"
+        [title]="movie.title"
+        class="preview-image"
       >
-        Details
-      </a>
+    </div>
+    <div class="flip-card__back">
+      <h4 class="title is-size-4 is-size-3-mobile has-text-centered">{{ movie.title }}</h4>
+      <p>{{ movie.overview }}</p>
+      <div class="flip-card__info">
+        <div class="vote">
+          <span>{{ movie.vote_average }}</span> / 10
+        </div>
+
+        <a
+          class="flip-card__details"
+          [routerLink]="'/movie/' + movie.id"
+          (click)="onDetailsClick($event)"
+        >
+          Details
+        </a>
+      </div>
     </div>
   </div>
 </div>

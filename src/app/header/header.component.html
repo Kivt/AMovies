@@ -36,6 +36,14 @@
         (click)="toggleMenu(false)"
       >Upcoming</a>
     </li>
+
+    <li class="nav-item is-hidden-desktop">
+      <a
+        class="nav-link" [routerLink]="['/search']"
+        [class.active]="activeRoute === '/search'"
+        (click)="toggleMenu(false)"
+      >Search</a>
+    </li>
   </ul>
 
   <app-header-search

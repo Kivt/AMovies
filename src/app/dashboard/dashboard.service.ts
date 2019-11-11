@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MoviePreview } from '../classes/movie-preview';
 import { ApiMoviesService } from '../api-movies.service';
-import { ReplaySubject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +11,10 @@ export class DashboardService {
   topRatedMovies: MoviePreview[] = [];
   nowPlayingMovies: MoviePreview[] = [];
   upcomingMovies: MoviePreview[] = [];
-  popularMoviesUpdated$ = new ReplaySubject<MoviePreview[]>();
-  topRatedMoviesUpdated$ = new ReplaySubject<MoviePreview[]>();
-  nowPlayingMoviesUpdated$ = new ReplaySubject<MoviePreview[]>();
-  upcomingMoviesUpdated$ = new ReplaySubject<MoviePreview[]>();
+  popularMoviesUpdated$ = new Subject<MoviePreview[]>();
+  topRatedMoviesUpdated$ = new Subject<MoviePreview[]>();
+  nowPlayingMoviesUpdated$ = new Subject<MoviePreview[]>();
+  upcomingMoviesUpdated$ = new Subject<MoviePreview[]>();
   flippedPreviews = {};
   isLoading = false;
 
@@ -26,10 +26,14 @@ export class DashboardService {
       this.isLoading = true;
       this.apiService[`get${cap}`]().subscribe((data) => {
         this[`${type}Movies`].push(...data.results);
-        this[`${type}MoviesUpdated$`].next(this[`${type}Movies`]);
+        this[`${type}MoviesUpdated$`].next(data.results);
         this.isLoading = false;
       });
     }
+  }
+
+  getCurrentMovies(type: string) {
+    return [...this[`${type}Movies`]];
   }
 
   getFlippedPreviews() {

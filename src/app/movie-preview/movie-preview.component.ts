@@ -9,6 +9,7 @@ import { MoviePreview } from '../classes/movie-preview';
 export class MoviePreviewComponent {
   @Input() movie: MoviePreview;
   @Input() isFlipped: boolean;
+  @Input() index = 0;
   @Output() previewClick: EventEmitter<MoviePreview> = new EventEmitter();
   @Output() detailsClick: EventEmitter<MoviePreview> = new EventEmitter();
 

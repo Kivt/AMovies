@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 
 import { DashboardService } from './dashboard.service';
 import { MoviePreview } from '../classes/movie-preview';
-import Helpers from '../helpers';
 import { ApiMoviesService } from '../api-movies.service';
 
 @Component({
@@ -19,6 +18,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   title = '';
   type = '';
   userCountryCode: string = null;
+  isAnimationRunning = false;
 
   constructor(
     private dashboardService: DashboardService,
@@ -53,10 +53,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   init() {
     this.subscibeForMoviesUpdate(this.type);
-    this.flippedPreviews = this.dashboardService.getFlippedPreviews();
-    if (!this.movies.length) {
+    const cashed = this.dashboardService.getCurrentMovies(this.type);
+    if (cashed.length) {
+      this.animatePreviews(cashed);
+    } else {
       this.onMoreClick();
     }
+    this.flippedPreviews = this.dashboardService.getFlippedPreviews();
   }
 
   onMoreClick() {
@@ -74,6 +77,34 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   subscibeForMoviesUpdate(type: string) {
     this.moviesObservable$ = this.dashboardService[`${type}MoviesUpdated$`]
-      .subscribe(data => this.movies = data);
+      .subscribe(data => {
+        this.animatePreviews(data);
+      });
+  }
+
+  animatePreviews(data: MoviePreview[]) {
+    if (!data.length) {
+      return;
+    }
+    this.isAnimationRunning = true;
+    let base = data;
+    let rest = [];
+    if (data.length > 30) {
+      base = data.splice(0, 30);
+      rest = data;
+    }
+
+    base.forEach((el, i) => {
+      setTimeout(() => {
+        this.movies.push(el);
+      }, i * 50);
+    });
+
+    setTimeout(() => {
+      this.isAnimationRunning = false;
+      if (rest.length) {
+        this.movies.push(...rest);
+      }
+    }, 50 * base.length);
   }
 }

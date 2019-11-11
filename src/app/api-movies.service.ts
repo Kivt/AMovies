@@ -23,7 +23,7 @@ export class ApiMoviesService {
 
   search(query: string, page: number = 1): Observable<any> {
     this.lastSearchQuery = query;
-    return this.request.get(`${this.baseUrl}search/movie?${this.API_KEY}&page=${page}&query=${query}`)
+    return this.request.get(`${this.baseUrl}search/movie?${this.API_KEY}&page=${page}&query=${query}&include_adult=false`)
       .pipe(
         tap((data) => { this.lastSearchResult = data.results; }),
       );

@@ -9,6 +9,7 @@
   ></app-movie-preview>
 
   <button
+    [style.opacity]="isAnimationRunning ? '0' : '1'"
     (click)="onMoreClick()"
     class="load-more-button"
     *ngIf="movies.length && type !== 'upcoming'"

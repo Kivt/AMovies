@@ -6,13 +6,9 @@
 
 .poster {
   flex: 1 0 auto;
-  max-width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  justify-content: center;
   margin-bottom: 2rem;
-  width: 35vw;
+  width: 100%;
+  max-width: 500px;
 }
 
 .top-info {
@@ -36,11 +32,11 @@
 }
 
 .main-title {
-  margin: 2.5rem 0 3rem;
+  margin: 0 0 3rem;
 }
 
 p {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 p > b {

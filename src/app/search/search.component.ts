@@ -1,58 +1,75 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MoviePreview } from '../classes/movie-preview';
 import { ApiMoviesService } from '../api-movies.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnDestroy {
   movies: MoviePreview[] = [];
+  routeSubscriber$: any;
   isInitial = true;
   isLoading = false;
+  isAnimationRunning = false;
   flippedPreviews = {};
   query = '';
 
   constructor(
     private apiService: ApiMoviesService,
-    private route: ActivatedRoute
-  ) { }
+    private route: ActivatedRoute,
+    private router: Router,
+  ) {
+    this.routeSubscriber$ = this.router.events.subscribe((e) => {
+      if (e instanceof NavigationEnd) {
+          this.query = this.route.snapshot.queryParams.q || '';
+          this.movies = [];
+          this.checkCashedMovies();
+      }
+    });
+  }
 
   ngOnInit() {
-    this.query = this.route.snapshot.queryParams.q || '';
-    this.checkCashedMovies();
+  }
+
+  ngOnDestroy() {
+    this.routeSubscriber$.unsubscribe();
   }
 
   checkCashedMovies() {
     if (this.query.length) {
       if (this.query === this.apiService.lastSearchQuery) {
-        this.movies = this.apiService.lastSearchResult;
+        this.animatePreviews(this.apiService.lastSearchResult);
         this.isInitial = false;
       } else {
         this.searchRequest(this.query);
       }
     } else if (this.apiService.lastSearchResult.length) {
-      this.movies = this.apiService.lastSearchResult;
+      this.animatePreviews(this.apiService.lastSearchResult);
       this.query = this.apiService.lastSearchQuery;
       this.isInitial = false;
     }
   }
 
   searchRequest(query: string) {
-    // TODO: error handling, send if input length > 2, input on enter
+    if (!query) {
+      return;
+    }
     this.isLoading = true;
     this.isInitial = false;
     this.apiService.search(query)
       .subscribe(
         (data) => {
-          this.movies = data.results;
+          this.movies = [];
+          this.animatePreviews(data.results);
           this.isLoading = false;
         },
         (err) => {
           this.movies = [];
           this.isLoading = false;
+          console.log(err);
         }
       );
   }
@@ -63,5 +80,18 @@ export class SearchComponent implements OnInit {
     } else {
       this.flippedPreviews[movie.id] = true;
     }
+  }
+
+  animatePreviews(data: MoviePreview[]) {
+    this.isAnimationRunning = true;
+    setTimeout(() => {
+      this.isAnimationRunning = false;
+    }, 50 * data.length);
+
+    data.forEach((el, i) => {
+      setTimeout(() => {
+        this.movies.push(el);
+      }, i * 50);
+    });
   }
 }

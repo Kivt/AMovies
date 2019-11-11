@@ -2,6 +2,11 @@
   perspective: 1000px;
 }
 
+.card-wrapper {
+  animation: fromBottom 0.25s ease-out;
+  height: 100%;
+}
+
 .flip-card {
   position: relative;
   width: 100%;
@@ -64,4 +69,15 @@ p {
 
 .vote span {
   font-size: 1.5rem;
+}
+
+@keyframes fromBottom {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
