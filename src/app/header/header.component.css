@@ -13,6 +13,14 @@
   align-items: center;
 }
 
+.logo-link {
+  display: flex;
+}
+
+.logo {
+  width: 55px;
+}
+
 .nav-list {
   display: flex;
   align-items: center;
