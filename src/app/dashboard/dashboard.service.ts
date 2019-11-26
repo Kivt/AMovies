@@ -7,33 +7,57 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class DashboardService {
-  popularMovies: MoviePreview[] = [];
-  topRatedMovies: MoviePreview[] = [];
-  nowPlayingMovies: MoviePreview[] = [];
-  upcomingMovies: MoviePreview[] = [];
+  popularMovies = {};
+  topRatedMovies = {};
+  nowPlayingMovies = {};
+  upcomingMovies = {};
   popularMoviesUpdated$ = new Subject<MoviePreview[]>();
   topRatedMoviesUpdated$ = new Subject<MoviePreview[]>();
   nowPlayingMoviesUpdated$ = new Subject<MoviePreview[]>();
   upcomingMoviesUpdated$ = new Subject<MoviePreview[]>();
   flippedPreviews = {};
   isLoading = false;
+  popularPage = 1;
+  topRatedPage = 1;
+  nowPlayingPage = 1;
+
+  topRatedMaxPage = null;
+  popularMaxPage = null;
+  nowPlayingMaxPage = null;
+
 
   constructor(private apiService: ApiMoviesService) { }
 
-  getMovies(type: string) {
+  getMovies(type: string, page = 1) {
     if (!this.isLoading) {
+      this.updatePage(type, page);
+      if (this[`${type}Movies`][page]) {
+        this[`${type}MoviesUpdated$`].next(this[`${type}Movies`][page]);
+        return;
+      }
       const cap = type.charAt(0).toUpperCase() + type.substring(1);
       this.isLoading = true;
-      this.apiService[`get${cap}`]().subscribe((data) => {
-        this[`${type}Movies`].push(...data.results);
+      this.apiService[`get${cap}`](page).subscribe((data) => {
+        this[`${type}Movies`][page] = data.results;
+        this[`${type}MaxPage`] = data.total_pages;
         this[`${type}MoviesUpdated$`].next(data.results);
         this.isLoading = false;
       });
     }
   }
 
-  getCurrentMovies(type: string) {
-    return [...this[`${type}Movies`]];
+  getPage(type: string) {
+    return this[`${type}Page`];
+  }
+
+  getMaxPage(type: string) {
+    return this[`${type}MaxPage`];
+  }
+
+  updatePage(type: string, newPage: number) {
+    if (this[`${type}Page`]) {
+      this[`${type}Page`] = newPage;
+    }
   }
 
   getFlippedPreviews() {

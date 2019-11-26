@@ -1,19 +1,21 @@
-<h2 class="title is-2">{{title | titlecase }} Movies</h2>
+<h2 class="title is-2 has-text-centered">{{title | titlecase }} Movies</h2>
 
 <div class="movies-preview__wrapper">
   <app-movie-preview
     *ngFor="let movie of movies"
     [movie]="movie"
+
     [isFlipped]="!!flippedPreviews[movie.id]"
     (previewClick)="onPreviewClick($event)"
   ></app-movie-preview>
+</div>
 
-  <button
-    [style.opacity]="isAnimationRunning ? '0' : '1'"
-    (click)="onMoreClick()"
-    class="load-more-button"
-    *ngIf="movies.length && type !== 'upcoming'"
-  >
-    Load more movies
-  </button>
+<div class="pagination-wrapper">
+  <app-pagination
+    *ngIf="isPagination"
+    [hidden]="isAnimationRunning"
+    [maxPage]="maxPage"
+    [page]="currentPage"
+    (change)="onPaginationChange($event)"
+  ></app-pagination>
 </div>

@@ -14,8 +14,6 @@ export class ApiMoviesService {
   lastSearchQuery = '';
   lastSearchResult: MoviePreview[] = [];
   region = '';
-  popularPage = 1;
-  topRatedPage = 1;
 
   constructor(private request: RequestService) {
     this.getRegion();
@@ -29,22 +27,16 @@ export class ApiMoviesService {
       );
   }
 
-  getPopular(): Observable<any> {
-    return this.request.get(`${this.baseUrl}movie/popular?${this.API_KEY}&page=${this.popularPage}&region=${this.region}`)
-      .pipe(
-        tap(() => this.popularPage++),
-      );
+  getPopular(page: number = 1): Observable<any> {
+    return this.request.get(`${this.baseUrl}movie/popular?${this.API_KEY}&page=${page}&region=${this.region}`);
   }
 
-  getTopRated(): Observable<any> {
-    return this.request.get(`${this.baseUrl}movie/top_rated?${this.API_KEY}&page=${this.topRatedPage}&region=${this.region}`)
-      .pipe(
-        tap(() => this.topRatedPage++),
-      );
+  getTopRated(page: number = 1): Observable<any> {
+    return this.request.get(`${this.baseUrl}movie/top_rated?${this.API_KEY}&page=${page}&region=${this.region}`);
   }
 
-  getNowPlaying(): Observable<any> {
-    return this.request.get(`${this.baseUrl}movie/now_playing?${this.API_KEY}&region=${this.region}`);
+  getNowPlaying(page: number = 1): Observable<any> {
+    return this.request.get(`${this.baseUrl}movie/now_playing?${this.API_KEY}&region=${this.region}&page=${page}`);
   }
 
   getUpcoming(): Observable<any> {

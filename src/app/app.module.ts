@@ -18,6 +18,7 @@ import { MovieVideosComponent } from './movie-videos/movie-videos.component';
 import { ModalVideoComponent } from './modal-video/modal-video.component';
 import { HeaderSearchComponent } from './header-search/header-search.component';
 import { SearchComponent } from './search/search.component';
+import { PaginationComponent } from './pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { SearchComponent } from './search/search.component';
     ModalVideoComponent,
     HeaderSearchComponent,
     SearchComponent,
+    PaginationComponent,
   ],
   imports: [
     BrowserModule,

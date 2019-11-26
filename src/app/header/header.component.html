@@ -8,7 +8,7 @@
     <li class="nav-item">
       <a
         class="nav-link" [routerLink]="['/popular']"
-        [class.active]="activeRoute === '/popular'"
+        [class.active]="activeRoute.includes('/popular')"
         (click)="toggleMenu(false)"
       >Popular</a>
     </li>
@@ -16,7 +16,7 @@
     <li class="nav-item">
       <a
         class="nav-link" [routerLink]="['/top-rated']"
-        [class.active]="activeRoute === '/top-rated'"
+        [class.active]="activeRoute.includes('/top-rated')"
         (click)="toggleMenu(false)"
       >Top rated</a>
     </li>
@@ -24,7 +24,7 @@
     <li class="nav-item">
       <a
         class="nav-link" [routerLink]="['/now-playing']"
-        [class.active]="activeRoute === '/now-playing'"
+        [class.active]="activeRoute.includes('/now-playing')"
         (click)="toggleMenu(false)"
       >Now Playing</a>
     </li>
@@ -32,7 +32,7 @@
     <li class="nav-item">
       <a
         class="nav-link" [routerLink]="['/upcoming']"
-        [class.active]="activeRoute === '/upcoming'"
+        [class.active]="activeRoute.includes('/upcoming')"
         (click)="toggleMenu(false)"
       >Upcoming</a>
     </li>

@@ -1,0 +1,33 @@
+.pagination-item {
+	list-style-type: none;
+}
+
+.pagination-link--normal {
+  padding: 0.5rem 5px;
+  display: block;
+  position: relative;
+  min-width: 45px;
+	text-decoration: none;
+  color: white;
+  border-radius: 2px;
+  margin: 0 5px;
+  transition: background-color .2s linear;
+}
+
+.pagination-link--normal:hover,
+.pagination-link--normal.is-active {
+  background-color: #673AB7;
+}
+
+.pagination-item--wide.first {
+	margin: 0 1em 0 0;
+}
+
+.pagination-item--wide.last {
+	margin: 0 0 0 1em;
+}
+
+.disabled {
+  color: gray;
+  pointer-events: none;
+}

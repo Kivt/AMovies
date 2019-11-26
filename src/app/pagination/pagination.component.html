@@ -1,0 +1,49 @@
+<ul class="pagination">
+  <li class="pagination-item--wide first">
+    <a
+      class="pagination-link--wide first"
+      [class.disabled]="currentPage === 1"
+      (click)="setPage(currentPage - 1)"
+    >Previous</a>
+  </li>
+
+  <li
+    *ngFor="let page of pages;"
+    class="pagination-item first-number"
+  >
+    <a
+      [class.is-active]="currentPage === page"
+      class="pagination-link--normal"
+      (click)="setPage(page)"
+    >
+      {{ page }}
+    </a>
+  </li>
+
+  <li class="pagination-item--wide last">
+    <a
+      class="pagination-link--wide last"
+      [class.disabled]="currentPage === maxPages"
+      (click)="setPage(currentPage + 1)"
+    >Next</a>
+  </li>
+</ul>
+
+<!-- <nav
+  [style.opacity]="isAnimationRunning ? '0' : '1'"
+  class="pagination is-centered is-small"
+  role="navigation"
+  aria-label="pagination"
+>
+  <ul class="pagination-list">
+    <li><a class="pagination-link" aria-label="Goto previous page"><</a></li>
+    <li><a class="pagination-link" aria-label="Goto page 1">1</a></li>
+    <li><span class="pagination-ellipsis">&hellip;</span></li>
+    <li><a class="pagination-link" aria-label="Goto page 45">45</a></li>
+    <li><a class="pagination-link is-current" aria-label="Page 46" aria-current="page">46</a></li>
+    <li><a class="pagination-link" aria-label="Goto page 47">47</a></li>
+    <li><span class="pagination-ellipsis">&hellip;</span></li>
+    <li><a class="pagination-link" aria-label="Goto page 86">86</a></li>
+    <li><a class="pagination-link" aria-label="Goto next page">></a></li>
+  </ul>
+</nav> -->

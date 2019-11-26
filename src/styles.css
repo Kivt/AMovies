@@ -18,6 +18,10 @@
   font-weight: 600;
 }
 
+.pagination-link {
+  background-color: white;
+}
+
 body, html {
   background-color: #1d193f;
 }

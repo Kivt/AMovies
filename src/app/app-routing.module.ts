@@ -28,6 +28,7 @@ const routes: Routes = [
     component: DashboardComponent,
     data: {
       type: 'popular',
+      pagination: true,
     }
   },
   {
@@ -35,6 +36,7 @@ const routes: Routes = [
     component: DashboardComponent,
     data: {
       type: 'topRated',
+      pagination: true,
     }
   },
   {
@@ -42,6 +44,7 @@ const routes: Routes = [
     component: DashboardComponent,
     data: {
       type: 'nowPlaying',
+      pagination: true,
     }
   },
   {
@@ -49,6 +52,7 @@ const routes: Routes = [
     component: DashboardComponent,
     data: {
       type: 'upcoming',
+      pagination: false,
     }
   },
   {

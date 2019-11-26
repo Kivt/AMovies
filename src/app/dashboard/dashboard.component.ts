@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { DashboardService } from './dashboard.service';
 import { MoviePreview } from '../classes/movie-preview';
@@ -18,22 +18,59 @@ export class DashboardComponent implements OnInit, OnDestroy {
   title = '';
   type = '';
   userCountryCode: string = null;
-  isAnimationRunning = false;
+  isAnimationRunning = true;
+  maxPage = null;
+  isPagination = false;
+  currentPage = 1;
 
   constructor(
     private dashboardService: DashboardService,
     private route: ActivatedRoute,
+    private router: Router,
     private apiService: ApiMoviesService,
   ) { }
 
   ngOnInit() {
     this.type = this.route.snapshot.data.type;
+    this.isPagination = this.route.snapshot.data.pagination;
     this.title = this.route.snapshot.routeConfig.path.replace('-', ' ');
+    this.subscribeToUrlParamsChange();
     if (!this.userCountryCode) {
       this.subscribeToRegionUpdate();
     } else {
       this.init();
     }
+  }
+
+  subscribeToUrlParamsChange() {
+    this.route.queryParams.subscribe(data => {
+      if (!data.page) {
+        const lastPage = this.dashboardService.getPage(this.type);
+        this.updateUrlQuery(lastPage);
+        this.currentPage = lastPage;
+      } else {
+        this.currentPage = this.validatePage(data.page);
+      }
+    });
+  }
+
+  validatePage(num: string): number {
+    const n = Number.parseInt(num, 10);
+    return isNaN(n) ? 1 : n;
+  }
+
+  updateUrlQuery(page: number) {
+    this.currentPage = page;
+    this.router.navigate([], {
+      queryParams: {
+        page,
+      }
+    });
+  }
+
+  onPaginationChange(num: number) {
+    this.updateUrlQuery(num);
+    this.getMovies();
   }
 
   ngOnDestroy() {
@@ -53,17 +90,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   init() {
     this.subscibeForMoviesUpdate(this.type);
-    const cashed = this.dashboardService.getCurrentMovies(this.type);
-    if (cashed.length) {
-      this.animatePreviews(cashed);
-    } else {
-      this.onMoreClick();
-    }
+    this.getMovies();
     this.flippedPreviews = this.dashboardService.getFlippedPreviews();
   }
 
-  onMoreClick() {
-    this.dashboardService.getMovies(this.type);
+  getMovies() {
+    this.dashboardService.getMovies(this.type, this.currentPage);
   }
 
   onPreviewClick(movie: MoviePreview) {
@@ -78,7 +110,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
   subscibeForMoviesUpdate(type: string) {
     this.moviesObservable$ = this.dashboardService[`${type}MoviesUpdated$`]
       .subscribe(data => {
+        this.movies = [];
         this.animatePreviews(data);
+        this.maxPage = this.dashboardService.getMaxPage(this.type);
       });
   }
 
@@ -87,14 +121,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
       return;
     }
     this.isAnimationRunning = true;
-    let base = data;
-    let rest = [];
-    if (data.length > 30) {
-      base = data.splice(0, 30);
-      rest = data;
-    }
 
-    base.forEach((el, i) => {
+    data.forEach((el, i) => {
       setTimeout(() => {
         this.movies.push(el);
       }, i * 50);
@@ -102,9 +130,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     setTimeout(() => {
       this.isAnimationRunning = false;
-      if (rest.length) {
-        this.movies.push(...rest);
-      }
-    }, 50 * base.length);
+    }, 50 * data.length);
   }
 }
