@@ -13,7 +13,13 @@
   right: 0;
   width: 100%;
   transform: translateY(100%);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4);
+  transition: visibility .2s linear, opacity .2s linear;
+  opacity: 0;
+}
+
+.search-results.has-results {
+  opacity: 1;
 }
 
 .search-results__empty,
@@ -45,4 +51,13 @@
 
 .search-results__description {
   font-size: 12px;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

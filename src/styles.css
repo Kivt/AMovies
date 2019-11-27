@@ -52,7 +52,7 @@ p {
 }
 
 [hidden] {
-  display: none!important;
+  visibility: hidden!important;
 }
 
 .title {
