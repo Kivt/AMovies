@@ -8,6 +8,7 @@ import { MovieVideo } from '../classes/movie-video';
 import { ApiMoviesService } from '../api-movies.service';
 import { AuthService } from '../auth/auth.service';
 import { MoviePreview } from '../classes/movie-preview';
+import { ModalVideoService } from '../modal-video/modal-video.service';
 
 @Component({
   selector: 'app-movie-details',
@@ -31,6 +32,7 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private ngxService: NgxUiLoaderService,
     private router: Router,
+    private videoService: ModalVideoService,
   ) { }
 
   ngOnInit() {
@@ -67,6 +69,20 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
     } else {
       this.flippedPreviews[movie.id] = true;
     }
+  }
+
+  openVideo(id: string) {
+    this.videoService.play(id);
+  }
+
+  formatNumber(val: string) {
+    let str = '' + val;
+    if (str.length > 3) {
+      str = str.replace(/\s/g, '').split('').reverse().join('');
+      str = str.match(/.{1,3}/g).join(' ');
+      str = str.split('').reverse().join('');
+    }
+    return str;
   }
 
   getDetails() {

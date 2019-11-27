@@ -13,7 +13,7 @@
 <div class="pagination-wrapper">
   <app-pagination
     *ngIf="isPagination"
-    [hidden]="isAnimationRunning"
+    [hidden]="!movies.length"
     [maxPage]="maxPage"
     [page]="currentPage"
     (change)="onPaginationChange($event)"

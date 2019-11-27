@@ -15,7 +15,6 @@ import { MoviePreviewComponent } from './movie-preview/movie-preview.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
-import { MovieVideosComponent } from './movie-videos/movie-videos.component';
 import { ModalVideoComponent } from './modal-video/modal-video.component';
 import { HeaderSearchComponent } from './header-search/header-search.component';
 import { SearchComponent } from './search/search.component';
@@ -30,7 +29,6 @@ import { PaginationComponent } from './pagination/pagination.component';
     LoginFormComponent,
     RegistrationFormComponent,
     MovieDetailsComponent,
-    MovieVideosComponent,
     ModalVideoComponent,
     HeaderSearchComponent,
     SearchComponent,

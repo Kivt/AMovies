@@ -14,6 +14,7 @@ export class ApiMoviesService {
   lastSearchQuery = '';
   lastSearchResult: MoviePreview[] = [];
   region = '';
+  language = navigator ? navigator.language : 'en';
 
   constructor(private request: RequestService) {
     this.getRegion();
@@ -28,23 +29,24 @@ export class ApiMoviesService {
   }
 
   getPopular(page: number = 1): Observable<any> {
-    return this.request.get(`${this.baseUrl}movie/popular?${this.API_KEY}&page=${page}&region=${this.region}`);
+    return this.request.get(`${this.baseUrl}movie/popular?${this.API_KEY}&page=${page}&region=${this.region}&language=${this.language}`);
   }
 
   getTopRated(page: number = 1): Observable<any> {
-    return this.request.get(`${this.baseUrl}movie/top_rated?${this.API_KEY}&page=${page}&region=${this.region}`);
+    return this.request.get(`${this.baseUrl}movie/top_rated?${this.API_KEY}&page=${page}&region=${this.region}&language=${this.language}`);
   }
 
   getNowPlaying(page: number = 1): Observable<any> {
-    return this.request.get(`${this.baseUrl}movie/now_playing?${this.API_KEY}&region=${this.region}&page=${page}`);
+    return this.request
+      .get(`${this.baseUrl}movie/now_playing?${this.API_KEY}&region=${this.region}&page=${page}&language=${this.language}`);
   }
 
   getUpcoming(): Observable<any> {
-    return this.request.get(`${this.baseUrl}movie/upcoming?${this.API_KEY}&region=${this.region}`);
+    return this.request.get(`${this.baseUrl}movie/upcoming?${this.API_KEY}&region=${this.region}&language=${this.language}`);
   }
 
   getMovieDetails(id: number | string): Observable<any> {
-    return this.request.get(`${this.baseUrl}movie/${id}?${this.API_KEY}`);
+    return this.request.get(`${this.baseUrl}movie/${id}?${this.API_KEY}&language=${this.language}`);
   }
 
   getRegion() {
@@ -56,20 +58,21 @@ export class ApiMoviesService {
       (err) => {
         console.log(err);
         this.region = 'US';
+        this.region = 'US';
         this.regionUpdated$.next('US');
       }
     );
   }
 
   getMovieCast(id: number | string): Observable<any> {
-    return this.request.get(`${this.baseUrl}movie/${id}/credits?${this.API_KEY}`);
+    return this.request.get(`${this.baseUrl}movie/${id}/credits?${this.API_KEY}&language=${this.language}`);
   }
 
   getMovieSimilar(id: number | string): Observable<any> {
-    return this.request.get(`${this.baseUrl}movie/${id}/similar?${this.API_KEY}`);
+    return this.request.get(`${this.baseUrl}movie/${id}/similar?${this.API_KEY}&language=${this.language}`);
   }
 
   getMovieVideos(id: number | string): Observable<any> {
-    return this.request.get(`${this.baseUrl}movie/${id}/videos?${this.API_KEY}`);
+    return this.request.get(`${this.baseUrl}movie/${id}/videos?${this.API_KEY}&language=${this.language}`);
   }
 }

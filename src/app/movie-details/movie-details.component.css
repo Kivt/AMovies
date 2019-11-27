@@ -6,7 +6,7 @@
 
 .poster {
   flex: 1 0 auto;
-  margin-bottom: 2rem;
+  margin: 0 auto 2rem auto;
   width: 100%;
   max-width: 500px;
 }
@@ -46,6 +46,26 @@ p > b {
 .similar-movies {
   margin-top: 2rem;
 }
+
+.movie-videos {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.movie-button {
+  margin-bottom: 1rem;
+  flex-grow: 0;
+  flex-shrink: 1;
+  max-width: 90.5vw;
+}
+
+.movie-button__text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 
 @media (min-width: 1200px) {
   .top-info {

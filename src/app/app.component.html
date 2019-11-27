@@ -1,9 +1,10 @@
 <app-header></app-header>
 
-<ngx-simplebar class="main-scrollbar">
+<ngx-simplebar #scrollbar class="main-scrollbar">
   <main class="app-content">
     <router-outlet></router-outlet>
   </main>
 </ngx-simplebar>
 
+<app-modal-video></app-modal-video>
 <ngx-ui-loader></ngx-ui-loader>

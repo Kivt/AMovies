@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ModalVideoService } from './modal-video.service';
 
 @Component({
   selector: 'app-modal-video',
@@ -9,9 +10,18 @@ export class ModalVideoComponent implements OnInit {
   videoId = '';
   isOpen = false;
 
-  constructor() { }
+  constructor(
+    private videoService: ModalVideoService,
+  ) { }
 
   ngOnInit() {
+    this.subscribeForOpen();
+  }
+
+  subscribeForOpen() {
+    this.videoService.modalOpened$.subscribe((videoId) => {
+      this.open(videoId);
+    });
   }
 
   open(id: string) {

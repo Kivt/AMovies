@@ -16,8 +16,8 @@
 
       <section class="top-info__details">
         <p>Genres: <b>{{ details.genres }}</b></p>
-        <p>Rating: <b>{{ details.vote_average }} by {{ details.vote_count }} people</b></p>
-        <p *ngIf="details.budget">Budget: <b>{{ details.budget }}$</b></p>
+        <p>Rating: <b>{{ details.vote_average }} by {{ formatNumber(details.vote_count) }} people</b></p>
+        <p *ngIf="details.budget">Budget: <b>{{ formatNumber(details.budget) }}$</b></p>
         <p>Duration: <b>{{ details.runtime }} minutes</b></p>
         <p>Produced by: <b>{{ details.production_companies }}</b></p>
         <p>Produced in: <b>{{ details.production_countries }}</b></p>
@@ -25,14 +25,24 @@
       </section>
 
       <section class="top-info__videos">
-        <app-movie-videos
-          [videos]="videos"
-        ></app-movie-videos>
+        <div class="movie-videos">
+          <button
+            *ngFor="let video of videos"
+            [title]="video.name"
+            class="button is-info movie-button"
+            (click)="openVideo(video.key)"
+          >
+            <div class="movie-button__text">{{ video.name }}</div>
+          </button>
+        </div>
       </section>
     </div>
   </div>
 
-  <div class="similar-movies">
+  <div
+    [hidden]="!similarMovies"
+    class="similar-movies"
+  >
     <h2 class="title is-3">Similar movies</h2>
 
     <div class="movies-preview__wrapper">

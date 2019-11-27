@@ -7,11 +7,17 @@
   >
     <div class="flip-card__front">
       <img
-        [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
+        #image
+        [hidden]="!isImageLoaded"
         [alt]="movie.title"
         [title]="movie.title"
         class="preview-image"
       >
+
+      <div
+        [hidden]="isImageLoaded"
+        class="loader"
+      ></div>
     </div>
 
     <div class="flip-card__back">

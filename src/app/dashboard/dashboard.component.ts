@@ -13,6 +13,7 @@ import { ApiMoviesService } from '../api-movies.service';
 export class DashboardComponent implements OnInit, OnDestroy {
   moviesObservable$: any;
   regionObservable$: any;
+  urlObservable$: any;
   movies: MoviePreview[] = [];
   flippedPreviews = {};
   title = '';
@@ -34,7 +35,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.type = this.route.snapshot.data.type;
     this.isPagination = this.route.snapshot.data.pagination;
     this.title = this.route.snapshot.routeConfig.path.replace('-', ' ');
-    this.subscribeToUrlParamsChange();
     if (!this.userCountryCode) {
       this.subscribeToRegionUpdate();
     } else {
@@ -43,11 +43,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   subscribeToUrlParamsChange() {
-    this.route.queryParams.subscribe(data => {
+    this.urlObservable$ = this.route.queryParams.subscribe(data => {
       if (!data.page) {
         const lastPage = this.dashboardService.getPage(this.type);
         this.updateUrlQuery(lastPage);
-        this.currentPage = lastPage;
+        this.onPaginationChange(lastPage);
       } else {
         const page = this.validatePage(data.page);
         this.onPaginationChange(page);
@@ -77,6 +77,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.moviesObservable$.unsubscribe();
     this.regionObservable$.unsubscribe();
+    this.urlObservable$.unsubscribe();
   }
 
   subscribeToRegionUpdate() {
@@ -91,8 +92,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   init() {
     this.subscibeForMoviesUpdate(this.type);
-    this.getMovies();
     this.flippedPreviews = this.dashboardService.getFlippedPreviews();
+    this.subscribeToUrlParamsChange();
   }
 
   getMovies() {
@@ -111,26 +112,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   subscibeForMoviesUpdate(type: string) {
     this.moviesObservable$ = this.dashboardService[`${type}MoviesUpdated$`]
       .subscribe(data => {
-        this.movies = [];
-        this.animatePreviews(data);
+        this.movies = data;
         this.maxPage = this.dashboardService.getMaxPage(this.type);
       });
-  }
-
-  animatePreviews(data: MoviePreview[]) {
-    if (!data.length) {
-      return;
-    }
-    this.isAnimationRunning = true;
-
-    data.forEach((el, i) => {
-      setTimeout(() => {
-        this.movies.push(el);
-      }, i * 50);
-    });
-
-    setTimeout(() => {
-      this.isAnimationRunning = false;
-    }, 50 * data.length);
   }
 }
