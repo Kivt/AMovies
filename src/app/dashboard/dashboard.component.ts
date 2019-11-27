@@ -49,7 +49,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.updateUrlQuery(lastPage);
         this.currentPage = lastPage;
       } else {
-        this.currentPage = this.validatePage(data.page);
+        const page = this.validatePage(data.page);
+        this.onPaginationChange(page);
       }
     });
   }
