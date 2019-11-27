@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { NgxYoutubePlayerModule } from 'ngx-youtube-player';
+import { SimplebarAngularModule } from 'simplebar-angular';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -42,6 +43,7 @@ import { PaginationComponent } from './pagination/pagination.component';
     FormsModule,
     NgxUiLoaderModule,
     NgxYoutubePlayerModule.forRoot(),
+    SimplebarAngularModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

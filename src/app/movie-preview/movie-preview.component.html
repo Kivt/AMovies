@@ -13,9 +13,16 @@
         class="preview-image"
       >
     </div>
+
     <div class="flip-card__back">
       <h4 class="title is-size-4 is-size-3-mobile has-text-centered">{{ movie.title }}</h4>
-      <p>{{ movie.overview }}</p>
+
+      <ngx-simplebar
+        class="flip-card__overview"
+      >
+        {{ movie.overview }}
+      </ngx-simplebar>
+
       <div class="flip-card__info">
         <div class="vote">
           <span>{{ movie.vote_average }}</span> / 10

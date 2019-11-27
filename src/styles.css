@@ -18,8 +18,8 @@
   font-weight: 600;
 }
 
-.pagination-link {
-  background-color: white;
+html {
+  overflow: hidden;;
 }
 
 body, html {
@@ -33,6 +33,10 @@ body {
   position: relative;
   min-height: 100vh;
   font-family: 'Montserrat', sans-serif;
+}
+
+.pagination-link {
+  background-color: white;
 }
 
 p {
@@ -62,6 +66,12 @@ p {
   height: 80vh;
   width: 80vw;
   max-width: 1300px;
+}
+
+/* Scrollbar */
+
+.simplebar-scrollbar:before {
+  background-color: rgba(255, 255, 255, .5)!important;
 }
 
 /* Movie preview grid */
