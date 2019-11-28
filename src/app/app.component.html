@@ -7,4 +7,13 @@
 </ngx-simplebar>
 
 <app-modal-video></app-modal-video>
-<ngx-ui-loader></ngx-ui-loader>
+
+<div
+  [hidden]="!isLoader"
+  class="global-loader"
+>
+  <div class="loader-wrapper">
+    <div class="loader"></div>
+  </div>
+</div>
+

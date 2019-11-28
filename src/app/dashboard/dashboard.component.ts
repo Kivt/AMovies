@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   urlObservable$: any;
   movies: MoviePreview[] = [];
   flippedPreviews = {};
+  genres = {};
   title = '';
   type = '';
   userCountryCode: string = null;
@@ -90,12 +91,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
       });
   }
 
-  init() {
-    this.subscibeForMoviesUpdate(this.type);
-    this.flippedPreviews = this.dashboardService.getFlippedPreviews();
-    this.subscribeToUrlParamsChange();
-  }
-
   getMovies() {
     this.dashboardService.getMovies(this.type, this.currentPage);
   }
@@ -115,5 +110,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.movies = data;
         this.maxPage = this.dashboardService.getMaxPage(this.type);
       });
+  }
+
+  init() {
+    this.subscibeForMoviesUpdate(this.type);
+    this.flippedPreviews = this.dashboardService.getFlippedPreviews();
+    this.subscribeToUrlParamsChange();
   }
 }

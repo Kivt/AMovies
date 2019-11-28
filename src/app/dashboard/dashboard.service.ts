@@ -11,11 +11,11 @@ export class DashboardService {
   topRatedMovies = {};
   nowPlayingMovies = {};
   upcomingMovies = {};
+  flippedPreviews = {};
   popularMoviesUpdated$ = new Subject<MoviePreview[]>();
   topRatedMoviesUpdated$ = new Subject<MoviePreview[]>();
   nowPlayingMoviesUpdated$ = new Subject<MoviePreview[]>();
   upcomingMoviesUpdated$ = new Subject<MoviePreview[]>();
-  flippedPreviews = {};
   isLoading = false;
   popularPage = 1;
   topRatedPage = 1;

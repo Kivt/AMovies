@@ -11,8 +11,7 @@ app.use(compression());
 app.use(express.static(__dirname + '/dist/movies'));
 
 app.get('/*', function(req,res) {
-
-res.sendFile(path.join(__dirname+'/dist/movies/index.html'));
+  res.sendFile(path.join(__dirname+'/dist/movies/index.html'));
 });
 
 // Start the app by listening on the default port

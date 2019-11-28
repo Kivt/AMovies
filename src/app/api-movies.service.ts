@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { RequestService } from './request.service';
 import { MoviePreview } from './classes/movie-preview';
+
+interface Genre {
+  id: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +15,11 @@ export class ApiMoviesService {
   private API_KEY = 'api_key=f50853c92ba860fc68991df84a4c209b';
   private baseUrl = 'https://api.themoviedb.org/3/';
   regionUpdated$ = new BehaviorSubject<string>(null);
+  genresUpdated$ = new BehaviorSubject<Genre>(null);
   lastSearchQuery = '';
   lastSearchResult: MoviePreview[] = [];
   region = '';
+  genres: Genre = null;
 
   constructor(private request: RequestService) {
     this.getRegion();
@@ -25,6 +31,17 @@ export class ApiMoviesService {
       .pipe(
         tap((data) => { this.lastSearchResult = data.results; }),
       );
+  }
+
+  getGenresList() {
+    return this.request.get(`${this.baseUrl}genre/movie/list?${this.API_KEY}`)
+      .subscribe(data => {
+        this.genres = data.genres.reduce((acc, el) => {
+          acc[el.id] = el.name;
+          return acc;
+        }, {});
+        this.genresUpdated$.next(this.genres);
+      });
   }
 
   getPopular(page: number = 1): Observable<any> {

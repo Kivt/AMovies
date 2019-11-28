@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import {ActivatedRoute, Router, NavigationEnd} from '@angular/router';
-import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { Subscription } from 'rxjs';
 
 import { MovieDetails } from '../classes/movie-details';
@@ -30,7 +29,6 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
     private apiService: ApiMoviesService,
     private authService: AuthService,
     private route: ActivatedRoute,
-    private ngxService: NgxUiLoaderService,
     private router: Router,
     private videoService: ModalVideoService,
   ) { }
@@ -86,22 +84,17 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
   }
 
   getDetails() {
-    this.ngxService.start();
     this.apiService.getMovieDetails(this.movieId)
       .subscribe(data => {
         const arraysToChange = ['production_companies', 'production_countries', 'genres'];
         this.details = data;
         this.arraysToString(arraysToChange);
-        this.ngxService.stop();
       });
   }
 
   arraysToString(arrays: string[]) {
     arrays.forEach(item => {
-      this.details[item] = this.arrayToStringList(
-        this.details[item],
-        'name'
-      );
+      this.details[item] = this.arrayToStringList(this.details[item], 'name');
     });
   }
 
@@ -115,9 +108,7 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
 
   arrayToStringList(arr: any[], key: string) {
     return arr
-      .reduce((acc, val) => {
-        return acc + val[key] + ', ';
-      }, '')
+      .reduce((acc, val) => acc + val[key] + ', ', '')
       .slice(0, -2);
   }
 

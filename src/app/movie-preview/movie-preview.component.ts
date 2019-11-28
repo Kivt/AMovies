@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, ViewChild, AfterContentInit, OnInit, OnDestroy } from '@angular/core';
 import { MoviePreview } from '../classes/movie-preview';
 import { ActivatedRoute } from '@angular/router';
+import { ApiMoviesService } from '../api-movies.service';
 
 @Component({
   selector: 'app-movie-preview',
@@ -16,11 +17,17 @@ export class MoviePreviewComponent implements OnInit, AfterContentInit, OnDestro
   @ViewChild('image') img;
   isImageLoaded = false;
   urlObservable$: any;
+  genresObservable$: any;
+  genres: {id: string};
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private apiService: ApiMoviesService,
+  ) {}
 
   ngOnInit() {
     this.subscribeToUrlParamsChange();
+    this.subscribeForGenresChange();
   }
 
   ngAfterContentInit() {
@@ -29,6 +36,23 @@ export class MoviePreviewComponent implements OnInit, AfterContentInit, OnDestro
 
   ngOnDestroy() {
     this.urlObservable$.unsubscribe();
+    this.genresObservable$.unsubscribe();
+  }
+
+  getGenresList() {
+    if (!this.genres) {
+      return '';
+    }
+    const arr = this.movie.genre_ids.map(el => this.genres[el]);
+    return arr.join(', ');
+  }
+
+  subscribeForGenresChange() {
+    this.genresObservable$ = this.apiService.genresUpdated$.subscribe(data => {
+      if (data) {
+        this.genres = data;
+      }
+    });
   }
 
   subscribeToUrlParamsChange() {

@@ -19,6 +19,10 @@
   background-color: #673AB7;
 }
 
+.pagination-link--wide:hover {
+  color: #3273dc;
+}
+
 .pagination-item--wide.first {
 	margin: 0 1em 0 0;
 }

@@ -14,12 +14,13 @@
 
       <p>Cast: <b>{{ cast }}</b></p>
 
+      <p>Produced by: <b>{{ details.production_companies }}</b></p>
+
       <section class="top-info__details">
         <p>Genres: <b>{{ details.genres }}</b></p>
         <p>Rating: <b>{{ details.vote_average }} by {{ formatNumber(details.vote_count) }} people</b></p>
         <p *ngIf="details.budget">Budget: <b>{{ formatNumber(details.budget) }}$</b></p>
         <p>Duration: <b>{{ details.runtime }} minutes</b></p>
-        <p>Produced by: <b>{{ details.production_companies }}</b></p>
         <p>Produced in: <b>{{ details.production_countries }}</b></p>
         <p>Release: <b>{{ details.release_date | date:"MMMM dd, yyyy" }}</b></p>
       </section>
@@ -32,7 +33,7 @@
             class="button is-info movie-button"
             (click)="openVideo(video.key)"
           >
-            <div class="movie-button__text">{{ video.name }}</div>
+            {{ video.name }}
           </button>
         </div>
       </section>

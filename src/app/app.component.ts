@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from './auth/auth.service';
 import { ActivatedRoute } from '@angular/router';
+import { ApiMoviesService } from './api-movies.service';
+import { LoaderService } from './loader.service';
 
 @Component({
   selector: 'app-root',
@@ -9,15 +11,20 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   @ViewChild('scrollbar') scrollbar;
+  isLoader = false;
 
   constructor(
+    private apiService: ApiMoviesService,
     private authService: AuthService,
     private route: ActivatedRoute,
+    private loaderService: LoaderService,
   ) { }
 
   ngOnInit() {
     this.authService.getToken();
     this.subscribeToUrlParamsChange();
+    this.subscribeToLoaderStateChange();
+    this.apiService.getGenresList();
   }
 
   subscribeToUrlParamsChange() {
@@ -29,6 +36,12 @@ export class AppComponent implements OnInit {
           top: 0,
         });
       }
+    });
+  }
+
+  subscribeToLoaderStateChange() {
+    this.loaderService.stateUpdated$.subscribe(data => {
+      this.isLoader = data;
     });
   }
 }

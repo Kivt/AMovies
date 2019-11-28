@@ -1,9 +1,6 @@
 /* tslint:disable */
 
-interface BaseArray {
-  id: number;
-  name: string;
-};
+import BaseArray from './base-array';
 
 export class MovieDetails {
   id: number;

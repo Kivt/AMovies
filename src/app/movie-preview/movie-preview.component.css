@@ -63,7 +63,7 @@
 .flip-card__info {
   margin-top: auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
 
@@ -76,12 +76,10 @@
   font-size: 1.5rem;
 }
 
+p {
+  margin-bottom: 1rem;
+}
 
-@keyframes appear {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+p > b {
+  padding-left: 0.5rem;
 }
