@@ -41,13 +41,13 @@ export class SearchComponent implements OnInit, OnDestroy {
   checkCashedMovies() {
     if (this.query.length) {
       if (this.query === this.apiService.lastSearchQuery) {
-        this.animatePreviews(this.apiService.lastSearchResult);
+        this.movies = this.apiService.lastSearchResult;
         this.isInitial = false;
       } else {
         this.searchRequest(this.query);
       }
     } else if (this.apiService.lastSearchResult.length) {
-      this.animatePreviews(this.apiService.lastSearchResult);
+      this.movies = this.apiService.lastSearchResult;
       this.query = this.apiService.lastSearchQuery;
       this.isInitial = false;
     }
@@ -62,8 +62,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.apiService.search(query)
       .subscribe(
         (data) => {
-          this.movies = [];
-          this.animatePreviews(data.results);
+          this.movies = data.results;
           this.isLoading = false;
         },
         (err) => {
@@ -80,18 +79,5 @@ export class SearchComponent implements OnInit, OnDestroy {
     } else {
       this.flippedPreviews[movie.id] = true;
     }
-  }
-
-  animatePreviews(data: MoviePreview[]) {
-    this.isAnimationRunning = true;
-    setTimeout(() => {
-      this.isAnimationRunning = false;
-    }, 50 * data.length);
-
-    data.forEach((el, i) => {
-      setTimeout(() => {
-        this.movies.push(el);
-      }, i * 50);
-    });
   }
 }

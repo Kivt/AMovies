@@ -18,7 +18,7 @@
 
 <div class="results">
   <div
-    [hidden]="!isInitial"
+    *ngIf="isInitial"
     class="empty-placeholder"
   >
     <img
@@ -29,6 +29,15 @@
 
     <h4  class="is-size-4 has-text-centered">
       Type in movie name
+    </h4>
+  </div>
+
+  <div
+    *ngIf="!isInitial && !movies.length && !isLoading"
+    class="empty-placeholder"
+  >
+    <h4  class="is-size-4 has-text-centered">
+      No result found
     </h4>
   </div>
 
