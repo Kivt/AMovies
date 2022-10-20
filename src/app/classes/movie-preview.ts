@@ -1,5 +1,3 @@
-/* tslint:disable */
-
 export class MoviePreview {
   id: number;
   title: string;

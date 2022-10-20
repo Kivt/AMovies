@@ -52,5 +52,4 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.routeChange$.unsubscribe();
     this.loginSubscribtion$.unsubscribe();
   }
-
 }

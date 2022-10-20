@@ -1,5 +1,3 @@
-/* tslint:disable */
-
 export class MovieCastMember {
   cast_id: number;
   character: string;
