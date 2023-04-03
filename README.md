@@ -1,6 +1,6 @@
 # Movies
 
-Demo: https://amovies.herokuapp.com/
+Demo:  https://amovies.herokuapp.com/
 
 ## Development server
 
